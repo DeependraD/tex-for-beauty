@@ -1,13 +1,19 @@
 \documentclass[a4paper,12pt]{article}
+\usepackage{color}
 \begin{document}
 \title{My first latex paper}
 \author{Deependra Dhakal}
 \date{\today}
 \maketitle
 
+\pagenumbering{roman}
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+
 This is the first line of text that has been typesetted by latex. This is the simplest of all too. Next I will elaborate how to best create tex files that will render beautifully formatted text.
 
-I didn't placed a title line or a header formatted line because I'm still looking for the ways to do that. BTW, I don't blame myself for cheating when I rendered some documents previously with templates from really awesome peoples. That's how the world progresses, one goes further building upon the foundations laid by the other.
+I didn't place a title line or a header formatted line because I'm still looking for the ways to do that. BTW, I don't blame myself for cheating when I rendered some documents previously with templates from really awesome peoples. That's how the world progresses, one goes further building upon the foundations laid by the other.
 
 I added a title with the author and date informations in the second commit.
 
@@ -21,8 +27,32 @@ In the article class, you can define a section command to specify a section. The
 \label{first-method}
 After the section and subsection commands are issued, one might, with relative ease, move around the document in a more convinient way. This can be accomplished by the use of label. Labelling of sections and subsections enable that those be referred using an inline command that refers them by their label.
 
-  I'd like to see how this line is formatted; Is it a body of subsection \@ref{first-method}or section \ref{methods-sec}itself.
+I'd like to see how this line is formatted; Is it a body of subsection \ref{first-method} or section \ref{methods-sec} itself.
 
-If the text above formats as subsection body then this one should definitely be a section body, at least that's what I've seen so far.
+If the text above formats as subsection body then this one should definitely be a section body, at least that's what I've seen so far. No! wait, that's not correct. \
+
+I was wrong the whole time; There is no real typographic tradition for marking going "up" to the parent selection. Traditional settings (and the latex markup) more or less assume that a section has some material at the start but once it starts subsection that all material will be in (some) subsection.
+
+Backslash is one arcane of a symbol to deal with in latex.\\ We'll have to give it a try to see what it makes of this sentence, because it contains two backslashes at the beginning of line which in unix would mean a literal backslash character.\ But is a plain backslash with a space trailing it still a command. \\  Wait to see if two spaces following new line specification matter. \\	We'll see the same with the tab inserted in between first word character and two backslashes.
+
+Well, It happens so that spaces(or any other characters) don't matter when present before a backslash. Two backslashes will begin a new line and the spaces trailing them don't matter, even if spaces mean tab. And a plain backslash with space trailing it don't count for any special effects.\\
+
+Anyway...There's a lot to learn.
+
+\subsection{Second move}
+\label{second-method}
+
+Let's tweak the font and see the beauty with which it shows up. \\
+\textit{this is me writing italic} \\
+\textsl{this is me writing slanted, as if I'm drunk} \\
+\textsc{this is me wearing small caps} \\
+\textbf{this is me being bold} \\
+\texttt{this is me teletyping} \\
+\textsf{this is me writing sans serif words} \\
+\textrm{this is me writing roman words} \\
+\underline{this is me underlining words} \\
+
+{\color{green}Does that mean I'm hulk if I write in green? Of course not. I'm not {\color{red}nuts} because I can write in either of the colors among {\color{red}Red}, {\color{blue}Blue}, {\color{green}green}, {\color{cyan}Cyan}, {\color{magenta}Magenta}, {\color{yellow}Yellow}, {\color{white}White}. But wait! What are those spaces? Well you know, They tell mr. Black is invisible, while infact it's mr. White who you can't see.}
 
 \end{document}
+
