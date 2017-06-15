@@ -10,4 +10,19 @@ This is the first line of text that has been typesetted by latex. This is the si
 I didn't placed a title line or a header formatted line because I'm still looking for the ways to do that. BTW, I don't blame myself for cheating when I rendered some documents previously with templates from really awesome peoples. That's how the world progresses, one goes further building upon the foundations laid by the other.
 
 I added a title with the author and date informations in the second commit.
+
+\section{Third commit first section}
+In the article class, you can define a section command to specify a section. The curly braces contain the title of the section.
+
+\section{Methods}
+\label{methods-sec}
+
+\subsection{First move}
+\label{first-method}
+After the section and subsection commands are issued, one might, with relative ease, move around the document in a more convinient way. This can be accomplished by the use of label. Labelling of sections and subsections enable that those be referred using an inline command that refers them by their label.
+
+  I'd like to see how this line is formatted; Is it a body of subsection \@ref{first-method}or section \ref{methods-sec}itself.
+
+If the text above formats as subsection body then this one should definitely be a section body, at least that's what I've seen so far.
+
 \end{document}
