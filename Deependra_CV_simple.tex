@@ -1,0 +1,81 @@
+\documentclass{article}
+
+\usepackage{titlesec}
+\usepackage{titling}
+\usepackage[margin=1in]{geometry}
+
+% title format requires 5 arguments;
+% first: name of the title
+% second: basic formatting
+% third: section numbering
+% fourth: spacing
+% fifth: title formatting
+
+\titleformat{\section}[frame]
+{\Large} % basic formatting
+{} % numbering or not; use \thesection to number
+{1em} % spacing
+{\filcenter\bfseries\uppercase} % formats only the title text.
+% {\bfseries\uppercase}[\titlerule] % Also accepts further formatting that come between the numbering and title
+
+\titleformat{\subsection}
+{\bfseries\large}
+{\hspace{-.25in}$\bullet$}
+{0em}
+{}
+
+\titleformat{\subsubsection}[runin] % runin causes text to appear on same line as the title
+{\bfseries\normalsize} 
+{}
+{0em} % this is the only compulsory option
+{}[---]
+
+\titlespacing{\subsubsection} % using runin
+{0em} % the margin spacing (from left)
+{0em} % the spacing before the title
+{0em} % the spacing after the title
+
+\renewcommand{\maketitle} % define your own title
+{
+\begin{center}
+{\huge\bfseries
+\theauthor}
+
+\vspace{0.25em}
+
+ddhakal.rookie@gmail.com --- http://deependrad.github.io
+
+\end{center}
+}
+
+\begin{document}
+
+\title{R\'esum\'e}
+\author{Deependra Dhakal}
+
+\maketitle
+
+\section{Technical Skills}
+
+\subsection{Languages}
+
+\subsubsection{programming}
+
+Python, R, HTML, Markdown, awk, \LaTeX
+
+\section{Education}
+
+\subsection{Primary level}
+
+\subsection{Secondary level}
+
+\subsection{Bachelor level}
+
+
+\section{Job Experience}
+
+\subsection{Short term jobs}
+
+\subsection{Extended period jobs}
+
+\end{document}

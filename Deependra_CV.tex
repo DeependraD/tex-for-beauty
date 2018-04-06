@@ -1,0 +1,155 @@
+\documentclass[11pt,a4paper,sans]{moderncv}
+
+%% ModernCV themes
+\moderncvstyle{casual}
+\moderncvcolor{blue}
+\renewcommand{\familydefault}{\sfdefault}
+\nopagenumbers{}
+
+%% Adjust the page margins
+\usepackage[margin=1.1in,scale=0.75]{geometry}
+\usepackage{tabularx}
+
+% For triple list column
+\usepackage{multicol}
+
+%% Character encoding
+\usepackage[utf8]{inputenc}
+
+%% Get recommended
+\newcommand{\recommendation}[6]{% change this to accept more details
+  \noindent
+  \begin{tabularx}{.5\linewidth}{@{\extracolsep{2pt}} l p{5cm} }
+    Name: & \bfseries\textit{#1} \\
+    Designation: & #2 \\
+    Department: & #3 \\
+    Institute: & #4 \\
+    Mobile: & #5 \\
+    Email: & #6 % \\
+    % Other: & #7
+  \end{tabularx}%
+}
+
+%% Personal data
+\firstname{Deependra}
+\familyname{Dhakal}
+% \title{Mr.} 
+\address{Bharatpur}{11, Chitwan}
+\mobile{+9779845333283} 
+% \phone{+2~(345)~678~901} 
+\email{ddhakal.rookie@gmail.com} 
+\homepage{deependrad.github.io} 
+% \extrainfo{additional information} 
+\photo[80pt][0.4pt]{./Photo_pp.jpg}
+% \quote{Some quote (optional)}
+
+%%------------------------------------------------------------------------------
+%% Content
+%%------------------------------------------------------------------------------
+\begin{document}
+\makecvtitle
+
+\section{Education}
+\cventry{2016 onwards}{\underline{M. Sc. Ag. (Plant Breeding and Genetics)}}{Agriculture and Forestry University}{Chitwan}{ \textit{} }{}  % arguments 3 to 6 can be left empty
+\cventry{2010--2015}{\underline{B. Sc. (Agriculture)}}{Institute of Agriculture and Animal Science}{Lamjung}{ \textit{First Division} }{Tribhuvan University}  % arguments 3 to 6 can be left empty
+\cventry{2008--2010}{\underline{Higher Secondary Level (10+2 in Science)}}{Orchid Science College}{Chitwan}{ \textit{First Division} }{Higher Secondary Education Board}
+\cventry{2008}{\underline{School Leaving Certificate}}{Small Heaven Higher Secondary Boarding School}{Chitwan}{ \textit{Distinction} }{SLC Board}
+
+\section{Academic achievement}
+% \cvitem{title}{ \emph{Title} }
+\cvitem{Publications}{}
+
+% \par{{\centering\textbf{Manuscript}\\}
+% \begin{flushright}
+% Study of Agro-Morphological Descriptors of Common Bean (Phaseolus Vulgaris L.) Genotypes\\ 
+% 2015\\
+% Plant Breeding and Genetics
+% \end{flushright}
+% }
+
+\begin{minipage}[t]{.15\textwidth}
+\hfill \textsc{Manuscript}
+\end{minipage}
+\hfill\vline\hfill
+\begin{minipage}[t]{.80\textwidth}
+\begin{itemize}
+\item{Study of Agro-Morphological Descriptors of Common Bean (Phaseolus Vulgaris L.) Genotypes\\
+\textit{2015}}
+\item{Study of spatial patterns in relation to leaf health as potential determinant of yield in early generation trial of wheat in Rampur, Chitwan\\
+\textit{(unpublished)}}
+\end{itemize}
+
+\end{minipage}\\
+\vspace{.15cm}
+
+\section{Programming language competencies}
+\cvitem{Scripting}{}
+\cvlistitem{Python, R, Bash, Javascript}
+\cvitem{Markup}{}
+\cvlistitem{Markdown, \LaTeX, HTML}
+
+\section{Computer application competencies}
+\cvdoubleitem{Crop modeling}{DSSAT}{GIS and spatial analysis}{QGIS}
+\cvitem{General purpose}{}
+\cvlistdoubleitem{ImageMagick, Tesseract}{MS Word, MS Excel, VBscript}
+
+% % triple itemize
+% \section{Triple itemize}
+% \cvitem{}{
+% \begin{minipage}[t]{0.25\textwidth}
+% \begin{itemize}
+% \item tiny item 1
+% \item tiny item 2
+% \end{itemize}
+% \end{minipage}
+% \begin{minipage}[t]{0.25\textwidth}
+% \begin{itemize}
+% \item tiny item 3
+% \item tiny item 4
+% \end{itemize}
+% \end{minipage}
+% \begin{minipage}[t]{0.25\textwidth}
+% \begin{itemize}
+% \item tiny item 5
+% \end{itemize}
+% \end{minipage}
+% }
+
+\section{Training and experience}
+\cventry{March 2014--April 2014}{Action Research for Cost Effective Agricultural Extension Services in 10 mid-hill districts of Nepal.}{Rukum District}{ \textit{Enumerator} }{Nepal Development Research Institute}{}
+
+\cventry{November 2016--December 2016}{Enhancing quality standards of raw milk: Validation of Good Manufacturing Practices(GMP) in the supply chain.}{Tanahun District}{ \textit{Field Research Associate} }{FORWARD Nepal}{}
+
+\section{Research interests}
+\cvlistitem{Mathematical modeling of diverse plant ecosystems with major focus on spatial components}
+\cvlistitem{Design and optimization of experiments with higher order constraints}
+
+\section{Advisors and Faculty}
+\recommendation{Dr. Madhav Prasad Pandey}
+    {Professor}
+    {Department of Genetics and Plant Breeding}
+    {Agriculture and Forestry University}
+    {9855081410} % mobile
+    {mppandey@afu.edu.np} % email
+  \recommendation{Dr. Krishna Hari Dhakal}
+    {Chairman}
+    {Department of Genetics and Plant Breeding}
+    {Agriculture and Forestry University}
+    {9843561486}
+    {khdhakal@afu.edu.np}
+
+\vspace{2cm}
+% \begin{center}
+\parbox[t]{\textwidth}{
+{\bfseries Declaration}\par
+
+I hereby declare that, all the information stated above is true and genuine in my belief. I can dispense any and/or all of the mentioned works in verified form whenever demanded.
+}
+% \end{center}
+
+%% A publications list
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{publications} % a bibtex file containing the list of publications
+
+\end{document}
