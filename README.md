@@ -22,7 +22,7 @@ pandoc.exe write_your_will.md --pdf-engine=pdflatex -o write_your_will.pdf
 ```
 latex -output-format=pdf Deependra_CV.tex
 ```
-__Note that, although, the output looks fancy, the pdf-engine is still the same old `pdflatex`__
+__Note that the output looks fancy with the use of moderncv package. The `pdf-engine` is still the same old `pdflatex`, though.__
 
 4. [My simple CV](Deependra_CV_simple.tex)
 ```
@@ -33,4 +33,4 @@ latex -output-format=pdf Deependra_CV_simple.tex
 ```
 latex -output-format=pdf Deependra_Cover.tex
 ```
-__Note that document class is letter not the default article document__
+__Note that document class is letter, not the default article document.__
