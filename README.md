@@ -34,3 +34,9 @@ latex -output-format=pdf Deependra_CV_simple.tex
 latex -output-format=pdf Deependra_Cover.tex
 ```
 __Note that document class is letter, not the default article document.__
+
+6. [My CV2](Deependra_CV2/Deependra_CV2.tex)
+```
+cd Deependra_CV2
+xelatex Deependra_CV2.tex
+```
