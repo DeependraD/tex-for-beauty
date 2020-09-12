@@ -1,0 +1,123 @@
+% This document keeps you settled getting a signature block done in a thesis or whateverelse
+
+\documentclass{article}
+
+% this first block of commands produce a \lsignblock command
+% which is an automated way to get a complete left aligned signature block
+% in single command stroke
+%-------------------------------------------X
+%Definition of right aligned signature block
+%%%Defined the signature line using \leaders%%%
+\def\mynewrule#1{\hbox to #1in{\leaders\hbox to 0.00625in{\hfil.\hfil}\hfill}}
+%%%%Defined the signature line with \hfill%%%   
+\def\lnewrule#1{\mynewrule{#1}}% {\hfill\mynewrule{#1}} for right alignment
+%%%%Defined block to include rule and information%%%
+\def\lsignblock#1#2#3#4#5{\lnewrule{#1}\par        
+\vtop{\hsize=#1in\noindent{#2}\par\noindent{#3}% \hfill at front for right alignment
+     \par\noindent{#4}\par\noindent{#5}}%
+ \vskip1cm}
+%-------------------------------------------X
+
+% the wildcard command for two side-by-side boxes
+%-------------------------------------------X
+% \newcommand*\wildcard[2][5cm]{\vspace*{1cm}\parbox{#1}{\hrulefill\par#2}}
+\newcommand*\wildcard[2][3cm]{\vspace*{1cm}\parbox{#1}{\centering\hrulefill\par#2\par}} % centered and extra version
+%-------------------------------------------X
+
+
+% the mysignrule
+%-------------------------------------------X
+\newcommand{\mysignrule}[1]{%
+\vspace{5ex}
+\rule{\linewidth}{0.5pt}\newline
+#1\par
+}
+%-------------------------------------------X
+
+\begin{document}
+
+% demonstrate where the margin is
+\hfill margin\par
+
+% demonstration of \lsignblock:
+
+\lsignblock{1}{Chairperson, Professor A}{}{}{}
+\lsignblock{2}{Professor B}{}{}{}
+\lsignblock{3}{Professor C}{}{}{}
+\lsignblock{2}{Professor D}{Head of the Institute of Pearls}{50 Rainbow Street}{Succhitash, OH}
+
+% demonstration of \wildcard command for side-by-side blocks
+
+\begingroup
+  \centering
+  \wildcard{Name 1}
+  \hspace{.5cm}
+  \wildcard{Name 2}
+  \hspace{.5cm}
+  \wildcard{Name 3\\ Adding more might not be desirable}
+  \par
+\endgroup
+
+% demonstration of a simple \parbox signature block:
+
+\noindent \parbox{5cm}{
+\underline{\hspace{4cm}}\\
+Chairperson, Professor A\\[1cm]
+\underline{\hspace{4cm}}\\
+Professor B\\[1cm]
+\underline{\hspace{4cm}}\\
+Professor C\\[1cm]
+}
+
+% demonstration of \mysignrule
+
+\begin{flushright}
+\begin{minipage}{0.45\linewidth}
+\mysignrule{Chairperson, Professor A}
+\mysignrule{Professor B}
+\mysignrule{Professor C}
+\end{minipage}
+\end{flushright}
+
+% demonstration of a simple signature block (sufficient for most cases):
+
+\noindent {\rule{0.2\textwidth}{.4pt}\\
+Chairperson, Professor Shit\\
+Direct from Hell\\[0.75cm]}
+
+% demonstration of \hrulefill and \phantom to get signature block
+
+Approved: \hrulefill
+
+\hspace*{0mm}\phantom{Approved: }Fats Domino, Ph.D.
+
+\hspace*{0mm}\phantom{Approved: }Chair of the Department of Nutrition\\[1cm]
+
+% demonstration of two side by side blocks in tabular environment
+
+\begin{tabular}{p{0.45\textwidth}cp{0.45\textwidth}}
+  \cline{1-1} \cline{3-3} \\
+  \centering {Name1\\ And his address and residence} & & \centering {Name2\\ And her address and residence and shitty little things whatever she does when he is not around}
+\end{tabular}
+
+% demonstration using \parbox
+
+\vfill  % push the rest to the bottom of the page
+\noindent 
+\parbox[b]{0.4\linewidth}{% size of the first signature box
+    \strut 
+    Signed by: \\[2cm]% This 2cm is the space for the signature under the names
+    % \hrule % replace with rule below to get a parwidth space
+    \rule{0.6\linewidth}{.4pt}\\
+    (Luke Skywalker)} 
+\hspace{1cm} % distance between the two signature blocks 
+\parbox[b]{0.4\linewidth}{% ...and the second one
+    \strut 
+    The force is strong in my family: \\[2cm]% This 2cm is the space for the signature under the names
+    % \hrule % replace with rule below to get a parwidth space
+    \rule{0.6\linewidth}{.4pt}\\
+    (Darth Vader)} 
+    \par\vspace{1cm} 
+
+
+\end{document}

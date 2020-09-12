@@ -1,0 +1,580 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Long table mixing with portrait and landscape},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{Long table mixing with portrait and landscape}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \author{}
+  \preauthor{}\postauthor{}
+  \date{}
+  \predate{}\postdate{}
+
+\usepackage{rotating}
+\usepackage{pdflscape}
+\newcommand{\blandscape}{\begin{landscape}}
+\newcommand{\elandscape}{\end{landscape}}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage[table]{xcolor}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage[normalem]{ulem}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\section{Page display modes and table formatting
+hacks}\label{page-display-modes-and-table-formatting-hacks}
+
+\subsection{Page display modes: portrait and
+landscape}\label{page-display-modes-portrait-and-landscape}
+
+\begin{itemize}
+\tightlist
+\item
+  to get every pages in landscape mode, add:
+  \texttt{classoption:\ landscape} to the yaml header.
+\item
+  \texttt{\textbackslash{}blandscape} and
+  \texttt{\textbackslash{}elandscape} commands come from modifications
+  of command in pdflscape package.
+\item
+  use \LaTeX~\texttt{pdflscape} package instead of \texttt{lscape}
+  package to get automatically rotated view of landscape pages in pdf
+  viewer.
+\end{itemize}
+
+Portrait page
+
+\begingroup
+\centering
+
+\begin{verbatim}
+##      speed           dist    
+##  Min.   : 4.0   Min.   :  2  
+##  1st Qu.:12.0   1st Qu.: 26  
+##  Median :15.0   Median : 36  
+##  Mean   :15.4   Mean   : 43  
+##  3rd Qu.:19.0   3rd Qu.: 56  
+##  Max.   :25.0   Max.   :120
+\end{verbatim}
+
+\endgroup
+
+\newpage
+
+\blandscape
+
+Landscape page
+
+\begin{verbatim}
+##      speed           dist    
+##  Min.   : 4.0   Min.   :  2  
+##  1st Qu.:12.0   1st Qu.: 26  
+##  Median :15.0   Median : 36  
+##  Mean   :15.4   Mean   : 43  
+##  3rd Qu.:19.0   3rd Qu.: 56  
+##  Max.   :25.0   Max.   :120
+\end{verbatim}
+
+\elandscape
+
+\newpage
+
+\subsection{\texorpdfstring{\texttt{xtable}: default and sidewaystable
+environments}{xtable: default and sidewaystable environments}}\label{xtable-default-and-sidewaystable-environments}
+
+\begin{itemize}
+\tightlist
+\item
+  using sidewaystable environment requires \texttt{rotating} package to
+  be used in latex preamble.
+\end{itemize}
+
+Portrait table using \texttt{xtable} without sidewaystable environment
+is shown in Table \ref{tab:xtab-without-sideways}.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{rll}
+  \hline
+ &     speed &      dist \\ 
+  \hline
+1 & Min.   : 4.0   & Min.   :  2   \\ 
+  2 & 1st Qu.:12.0   & 1st Qu.: 26   \\ 
+  3 & Median :15.0   & Median : 36   \\ 
+  4 & Mean   :15.4   & Mean   : 43   \\ 
+  5 & 3rd Qu.:19.0   & 3rd Qu.: 56   \\ 
+  6 & Max.   :25.0   & Max.   :120   \\ 
+   \hline
+\end{tabular}
+\caption{Portrait\label{tab:xtab-without-sideways} table} 
+\end{table}
+
+Landscape table using \texttt{xtable} with sidewaystable environment is
+shown in Table \ref{tab:xtab-with-sideways}.
+
+\begin{sidewaystable}[ht]
+\centering
+\begin{tabular}{rll}
+  \hline
+ &     speed &      dist \\ 
+  \hline
+1 & Min.   : 4.0   & Min.   :  2   \\ 
+  2 & 1st Qu.:12.0   & 1st Qu.: 26   \\ 
+  3 & Median :15.0   & Median : 36   \\ 
+  4 & Mean   :15.4   & Mean   : 43   \\ 
+  5 & 3rd Qu.:19.0   & 3rd Qu.: 56   \\ 
+  6 & Max.   :25.0   & Max.   :120   \\ 
+   \hline
+\end{tabular}
+\caption{Landscape\label{tab:xtab-with-sideways} table} 
+\end{sidewaystable}
+
+\subsection{\texorpdfstring{\texttt{xtable} workaround for landscape and
+portrait tables in same
+page}{xtable workaround for landscape and portrait tables in same page}}\label{xtable-workaround-for-landscape-and-portrait-tables-in-same-page}
+
+Portrait table is shown in \ref{tab:same-page-portrait}.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{rll}
+  \hline
+ &     speed &      dist \\ 
+  \hline
+1 & Min.   : 4.0   & Min.   :  2   \\ 
+  2 & 1st Qu.:12.0   & 1st Qu.: 26   \\ 
+  3 & Median :15.0   & Median : 36   \\ 
+  4 & Mean   :15.4   & Mean   : 43   \\ 
+  5 & 3rd Qu.:19.0   & 3rd Qu.: 56   \\ 
+  6 & Max.   :25.0   & Max.   :120   \\ 
+   \hline
+\end{tabular}
+\caption{Portrait\label{tab:same-page-portrait} table} 
+\end{table}
+
+Landscape table is shown in \ref{tab:same-page-landscape}.
+
+\begin{table}[ht]
+\centering\rotatebox{90}{
+\begin{tabular}{rll}
+  \hline
+ &     speed &      dist \\ 
+  \hline
+1 & Min.   : 4.0   & Min.   :  2   \\ 
+  2 & 1st Qu.:12.0   & 1st Qu.: 26   \\ 
+  3 & Median :15.0   & Median : 36   \\ 
+  4 & Mean   :15.4   & Mean   : 43   \\ 
+  5 & 3rd Qu.:19.0   & 3rd Qu.: 56   \\ 
+  6 & Max.   :25.0   & Max.   :120   \\ 
+   \hline
+\end{tabular}} 
+\caption{Landscape\label{tab:same-page-landscape} table}
+\end{table}
+
+\subsection{\texorpdfstring{Long table with footnotes using
+\texttt{knitr::kable()}}{Long table with footnotes using knitr::kable()}}\label{long-table-with-footnotes-using-knitrkable}
+
+Long table formatted with footnote marks in the table using
+\texttt{knitr::kable()} is shown in Table \ref{tab:check-vars-info1}.
+
+\rowcolors{2}{white}{gray!6}
+
+\begin{longtable}[t]{>{\centering\arraybackslash}p{2.0cm}>{\centering\arraybackslash}p{3.4cm}>{\centering\arraybackslash}p{3.4cm}>{\centering\arraybackslash}p{3.4cm}>{\centering\arraybackslash}p{3.4cm}}
+\caption{\label{tab:check-vars-info1}A summary of check varieties used in the study}\\
+\hiderowcolors
+\toprule
+Characteristics & Tilottama\footnotemark{}\strut \footnotetext{\url{http://wheatatlas.org/varieties/detail/26413}} & Bhrikuti\footnotemark{}\strut \footnotetext{\url{http://wheatatlas.org/varieties/detail/22378}} & Gautam\footnotemark{}\strut \footnotetext{\url{http://wheatatlas.org/varieties/detail/22383}} & Aditya\footnotemark{}\strut \footnotetext{\url{http://wheatatlas.org/varieties/detail/22373}}\\
+\midrule
+\showrowcolors
+Year & 2014 & 1994 & 2002 & 2010\\
+Breeding program & Nepal Agriculture Research Council & Nepal Agriculture Research Council & Nepal Agriculture Research Council & Nepal Agriculture Research Council\\
+Synonym & NL 1073; NL1073; NL-1073; FRANCOLIN; FRANKOLIN &  & BL 1887; BL-1887, BL1887 & \\
+Growth Habit & Spring & Spring & Spring & Spring\\
+Variety Type & Bread Wheat & Bread Wheat & Bread Wheat & Bread Wheat\\
+\addlinespace
+Semidwarf (Rht gene) & Yes & Yes & Yes & \\
+Grain color &  &  &  & White grain\\
+Grain hardiness &  &  &  & \\
+Pedigree & WAXWING*\-2/VIVITSI & CONTESTAD\-O/COCORAQUE F 75/3/POLLO//F\-URY/ANAHUAC F 75 & SIDDHARTHA/NG 8319//NL 297 or SIDHHARTHA/NG 8319//NL 297 & GS348/NL746//NL748\\
+Selection history &  & NL 623 FR 2308-2F-1F-0F & NC 1838-4B-020B-020B-2B-0B & \\
+\addlinespace
+CID (Cross ID) &  & 251774 &  & \\
+SID (Selection ID) &  & 0 &  & \\
+Origin & Advanced line from CIMMYT & Advanced line from CIMMYT & Cross made in the country, one CIMMYT parent & Cross made in the country, no CIMMYT parents\\
+CIMMYT breeding line & FRANCOLIN &  &  & \\
+Genes &  &  &  & \\
+\addlinespace
+Selection Code &  & Line from CIMMYT, further local selection within country &  & \\
+Ug99 & Yes & No & No & No\\
+Stem Rust & Yes &  &  & \\
+Yellow Rust & Yes &  &  & \\
+Leaf Rust & Yes &  &  & \\
+\addlinespace
+ME1 &  & Spring Wheat & Spring Wheat & Spring Wheat\\
+ME2 &  & Spring Wheat & Spring Wheat & \\
+ME3 &  &  &  & \\
+Production Conditions & Irrigated and semi-irrigated areas of Terai and inner Terai &  & Irrigated, both normal and late sown condition of whole Terai, Taar and foot-hills (<500 m); maturity 105-115; potential yield - 5t/ha & Terai, Tars and Lower Valleys up to 500 500 masl; maturity 118 days, yield potential 4.8 t/ha\\
+Suitable megaenvironments & ME1 & ME1 , ME5 & ME1 , ME5 & ME1\\
+\addlinespace
+Notes & Resistant to spot blotch. High tillering. Early maturing, stay green, excellent for bread and chapati. &  &  & \\
+Cultivated area &  & 153,055 (2011/12) &  & 38263 (2011/12)\\
+\bottomrule
+\end{longtable}
+
+\rowcolors{2}{white}{white}
+
+\subsection{Long table with footnotes using panodoc (default)
+syntax}\label{long-table-with-footnotes-using-panodoc-default-syntax}
+
+Four check varieties (Described in Table \ref{tab:check-vars-info2}),
+released at different periods, adapted to a range of environmental
+conditions in Nepal were included alongside in the study.
+
+\begin{longtable}[]{@{}ccccc@{}}
+\caption{\label{tab:check-vars-info2} A summary of check varieties used in
+the study}\tabularnewline
+\toprule
+\begin{minipage}[b]{0.06\columnwidth}\centering\strut
+\strut
+\end{minipage} & \begin{minipage}[b]{0.08\columnwidth}\centering\strut
+Aditya\footnotemark{}\strut
+\end{minipage}
+\footnotetext{\url{http://wheatatlas.org/varieties/detail/22373}} &
+\begin{minipage}[b]{0.11\columnwidth}\centering\strut
+Bhrikuti\footnotemark{}\strut
+\end{minipage}
+\footnotetext{\url{http://wheatatlas.org/varieties/detail/22378}} &
+\begin{minipage}[b]{0.08\columnwidth}\centering\strut
+Gautam\footnotemark{}\strut
+\end{minipage}
+\footnotetext{\url{http://wheatatlas.org/varieties/detail/22383}} &
+\begin{minipage}[b]{0.12\columnwidth}\centering\strut
+Tilottama\footnotemark{}\strut
+\end{minipage}
+\footnotetext{\url{http://wheatatlas.org/varieties/detail/26413}}\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+\begin{minipage}[b]{0.06\columnwidth}\centering\strut
+\strut
+\end{minipage} & \begin{minipage}[b]{0.08\columnwidth}\centering\strut
+Aditya\footnotemark{}\strut
+\end{minipage}
+\footnotetext{\url{http://wheatatlas.org/varieties/detail/22373}} &
+\begin{minipage}[b]{0.11\columnwidth}\centering\strut
+Bhrikuti\footnotemark{}\strut
+\end{minipage}
+\footnotetext{\url{http://wheatatlas.org/varieties/detail/22378}} &
+\begin{minipage}[b]{0.08\columnwidth}\centering\strut
+Gautam\footnotemark{}\strut
+\end{minipage}
+\footnotetext{\url{http://wheatatlas.org/varieties/detail/22383}} &
+\begin{minipage}[b]{0.12\columnwidth}\centering\strut
+Tilottama\footnotemark{}\strut
+\end{minipage}
+\footnotetext{\url{http://wheatatlas.org/varieties/detail/26413}}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.06\columnwidth}\centering\strut
+Year released\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+2010\strut
+\end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+1994*\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+2002\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+2014\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.06\columnwidth}\centering\strut
+Synonym\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+HD-2781*\strut
+\end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+NL-623*\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+BL-1887; NC-1838-4B-020B-020B-2B-0B*\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+NL 1073; NL1073; NL-1073; FRANCOLIN; FRANKOLIN\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.06\columnwidth}\centering\strut
+Wheat type\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+Bread\strut
+\end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+Bread\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+Bread\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+Bread\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.06\columnwidth}\centering\strut
+Semidwarf (Rht gene)\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+No Info\strut
+\end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+Yes\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+Yes\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+Yes\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.06\columnwidth}\centering\strut
+Grain color\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+White grain\strut
+\end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+Unknown\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+Unknown\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+Unknown\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.06\columnwidth}\centering\strut
+Grain hardiness\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+Unknown\strut
+\end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+Unknown\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+Unknown\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+Unknown\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.06\columnwidth}\centering\strut
+Pedigree\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+GS348/NL746//NL748; BOBWHITE/C-306/C-591/HW-2004*\strut
+\end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+CONTESTADO/COCORAQUE F 75/3/POLLO//FURY/ANAHUAC F 75;
+CLEMENT/COCORAQUE-75/3/POLLO//FURY/ANAHUAC-75*\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+SIDDHARTHA/NG 8319//NL 297 or SIDHHARTHA/NG 8319//NL 297\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+WAXWING*2/VIVITSI\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.06\columnwidth}\centering\strut
+Selection history\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+HD-2781*\strut
+\end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+NL 623 FR 2308-2F-1F-0F; NL-623*\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+NC 1838-4B-020B-020B-2B-0B\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+CGSS-01-B-00056T-099Y-099M-099M-099Y-099M-14Y-0B*\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.06\columnwidth}\centering\strut
+Breeding program\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+Nepal Agriculture Research Council(NARC)\strut
+\end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+NARC\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+NARC\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+NARC\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.06\columnwidth}\centering\strut
+CID (Cross ID)\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+251774\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.06\columnwidth}\centering\strut
+Accession number\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+K-63729*\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.06\columnwidth}\centering\strut
+SID (Selection ID)\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+0\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.06\columnwidth}\centering\strut
+Origin\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+Cross made in the country, no CIMMYT parents\strut
+\end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+Advanced line from CIMMYT\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+Cross made in the country, one CIMMYT parent\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+Advanced line from CIMMYT\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.06\columnwidth}\centering\strut
+CIMMYT breeding line\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+FRANCOLIN\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.06\columnwidth}\centering\strut
+Genes\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+Sr2*; no-Lr34*; Glu-A1b*,Glu-B1i*,Glu-D1a*\strut
+\end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+Lr34*; Glu-A1b*,Glu-B1i*,Glu-D1a*\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+Sr2+\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.06\columnwidth}\centering\strut
+Suitable megaenvironments\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+ME1\strut
+\end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+ME1, ME5\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+ME1, ME5\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.06\columnwidth}\centering\strut
+Notes\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+Terai, Tars and Lower Valleys up to 500 500 masl; maturity 118 days,
+yield potential 4.8 t/ha\strut
+\end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+Irrigated, both normal and late sown condition of whole Terai, Taar and
+foot-hills (\textless{}500 m); maturity 105-115; potential yield -
+5t/ha\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+Resistant to spot blotch. High tillering. Early maturing, stay green,
+excellent for bread and chapati.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.06\columnwidth}\centering\strut
+Resistance to Ug99 rust\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+No\strut
+\end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+No\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+No\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+Yes(including to Stem, Yellow and Leaf)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.06\columnwidth}\centering\strut
+Approximate acerage variety grown\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+38,263(2011-12)\strut
+\end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+153,055(2011-12)\strut
+\end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+
+\end{document}

@@ -1,0 +1,153 @@
+\documentclass{report}
+
+% this is to define width of "hrule" macro (make it thicker from default of 0.4pt)
+\makeatletter
+\renewcommand{\hrulefill}{\leavevmode\leaders\hrule height 1pt\hfill\kern\z@}
+\makeatother
+
+% \usepackage{showframe}% For reference of the text block margins
+% 
+% \setlength{\parindent}{0pt}% For this example
+\usepackage{listings}% http://ctan.org/pkg/listings
+%\usepackage{xcolor}% http://ctan.org/pkg/xcolor | Loaded by listings
+\usepackage{xhfill}% http://ctan.org/pkg/xhfill
+\usepackage{framed}
+
+\setlength{\parindent}{0pt}% Just for this example
+\newcommand{\xfill}[2][1ex]{{%
+  \dimen0=#2\advance\dimen0 by #1
+  \leaders\hrule height \dimen0 depth -#1\hfill%
+}}
+\newcommand{\xfilll}[2][1ex]{%
+  \dimen0=#2\advance\dimen0 by #1%
+  \leaders\hrule height \dimen0 depth -#1\hfill%
+}
+
+\begin{document}
+
+A: Rule across entire text block
+
+\rule{\linewidth}{.4pt}
+
+B: Rule from left margin across entire page
+
+\makebox[\linewidth][l]{\rule{\paperwidth}{.4pt}}
+
+C: Rule from left margin across entire text block + 2cm
+
+\makebox[\linewidth][l]{\rule{\dimexpr\textwidth+2cm}{.4pt}}
+
+D: Rule from right margin across entire page
+
+\makebox[\linewidth][r]{\rule{\paperwidth}{0.4pt}}
+
+E: Rule from right margin across entire text block + 2em
+
+\makebox[\linewidth][r]{\rule{\dimexpr\textwidth+2em}{0.4pt}}
+
+G: Rule from right margin across entire text block + 2em with 0.7pt width
+
+\makebox[\linewidth][r]{\rule{\dimexpr\textwidth+2em}{0.7pt}}
+
+H: You can make use of minipage, \verb$\parbox$, and \verb$\pbox$ to embed paragraphs in non-paragraph boxes. For instance:
+
+\fbox{
+  \parbox{\textwidth}{
+    Some very long text\\
+    that would not be allowed\\
+    in an fbox.
+  }
+}
+
+\makebox[0pt]{Some text} over this text
+
+\makebox[15ex][s]{Censored text}\hspace{-15ex}\makebox[15ex][s]{X X X X X}
+
+Text \makebox[2\width][r]{running away}
+
+Text \makebox[3\width][r]{running away}
+
+Text \makebox[2\width][s]{running away}
+
+\noindent Text \makebox[2\width][s]{running away}
+
+Text \makebox[2\width][r]{running away}
+
+% hrule length equal to the textbox
+Text \makebox[2\width][l]{\hrulefill running away}
+
+Text \makebox[2\width][r]{\hrulefill running away}
+
+\makebox[2.5in]{\hrulefill} \hspace {1.0in}\makebox[2.5in]{\hrulefill} \\
+User Representative \makebox[2.5in][r]{Date} \\
+
+\vspace{.2in}
+\makebox[2.5in]{\hrulefill} \hspace {1.0in}\makebox[2.5in]{\hrulefill} \\
+Program Manager \makebox[2.5in][r]{Date} \
+
+\makebox[\textwidth]{c e n t r a l} \par
+
+\makebox[\textwidth][s]{s p r e a d} \par
+
+\framebox[1.1\width]{Guess I'm framed now!} \par
+
+\framebox[0.8\width][r]{Bummer, I am too wide} \par
+
+\framebox[1cm][l]{never mind, so am I}
+
+Can you read this?
+
+\begin{framed}
+This is an easy way to box text within a document!
+\end{framed}
+
+blah\xfilll{1pt}blub
+\begin{lstlisting}
+blah\xfilll{1pt}blub
+\end{lstlisting}
+blah\xfilll{1pt}blub
+\begin{lstlisting}
+blah\xfilll{1pt}blub
+\end{lstlisting}
+
+blah\xfilll[0pt]{4pt}blub
+\begin{lstlisting}
+blah\xfilll[0pt]{4pt}blub
+\end{lstlisting}
+
+blah\xfilll[-12pt]{12pt}blub
+\begin{lstlisting}
+blah\xfilll[-12pt]{12pt}blub
+\end{lstlisting}
+
+blah\xrfill{1pt}[blue]blub blah\xrfill{2pt}[cyan]blub
+\begin{lstlisting}
+blah\xrfill{1pt}[blue]blub blah\xrfill{2pt}[cyan]blub
+\end{lstlisting}
+
+laber\xrfill[0pt]{4pt}[green]blub blub
+\begin{lstlisting}
+laber\xrfill[0pt]{4pt}[green]blub blub
+\end{lstlisting}
+
+blah\xrfill[-1ex]{1pt}[red]blub
+\begin{lstlisting}
+blah\xrfill[-1ex]{1pt}[red]blub
+\end{lstlisting}
+
+blah \xhrulefill{cyan}{1cm} blub
+\begin{lstlisting}
+blah \xhrulefill{cyan}{1cm} blub
+\end{lstlisting}
+
+blah \xhrectanglefill{0.5cm}{1pt} blubber
+\begin{lstlisting}
+blah \xhrectanglefill{0.5cm}{1pt} blubber
+\end{lstlisting}
+
+blah\xdotfill{1pt}[blue]blah\xdotfill{2pt}[red]blub
+\begin{lstlisting}
+blah\xdotfill{1pt}[blue]blah\xdotfill{2pt}[red]blub
+\end{lstlisting}
+
+\end{document}

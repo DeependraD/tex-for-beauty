@@ -1,0 +1,70 @@
+\documentclass{book}
+\usepackage{calc,pgfornament,rotating,graphicx}
+\usetikzlibrary{fadings,fit,backgrounds}
+\tikzfading[
+  name=fade north,
+  top color=transparent!100,
+  bottom color=transparent!0]
+\tikzfading[
+  name=fade south,
+  top color=transparent!0,
+  bottom color=transparent!100]
+\usepackage{kantlipsum}
+\begin{document}
+  \newlength\myparheight
+  \settototalheight{\myparheight}{\parbox{.75\textwidth}{\kant[1]}}
+  \chapter{First}
+  \newlength\myornheight
+  \settototalheight{\myornheight}{\pgfornament[width=.225\textwidth]{81}}
+  \noindent
+  \begin{minipage}{.225\textwidth}
+    \color{gray}%
+    \centering
+    \vspace*{.25\myornheight}\par
+    \pgfornament[width=\linewidth]{81}
+    \vspace*{-.25\myornheight}\par
+    \begin{sideways}
+      \pgfornament[width=.425\myparheight, symmetry=h]{15}%
+      \pgfornament[width=.425\myparheight, symmetry=h]{16}
+    \end{sideways}%
+    \begin{sideways}
+      \pgfornament[width=.425\myparheight]{15}%
+      \pgfornament[width=.425\myparheight]{16}
+    \end{sideways}
+    \vspace*{-.75\myornheight}\par
+    \pgfornament[width=\linewidth]{81}
+  \end{minipage}\hfill
+  \begin{minipage}{.75\textwidth}
+    \kant[1]
+  \end{minipage}
+
+  \chapter{Second}
+  \noindent
+  \begin{minipage}{.225\textwidth}
+    \resizebox*{\linewidth}{\myparheight}{%
+      \begin{tikzpicture}[inner sep=0pt, outer sep=0pt]
+        \draw [inner color=white, outer color=black, draw opacity=.75]
+          (0,0) coordinate (o) [out=75,in=-30] to (0,1) [out=-45, in=105] to cycle
+          (0,0) [out=-75, in=30] to (0,-1) [out=45, in=-105] to cycle
+          (0,0) [out=30, in=-120] to (.5,1) [out=-150, in=30] to cycle
+          (0,0) [out=30, in=-135] to (1,1)  coordinate (ne) [out=-150, in=30] to cycle
+          (0,0) [out=-30, in=120] to (.5,-1) [out=150, in=-30] to cycle
+          (0,0) [out=-30, in=135] to (1,-1)  coordinate (se) [out=150, in=-30] to cycle
+          (0,0) [out=20, in=-125] to (1,.67) [out=-155, in=20] to cycle
+          (0,0) [out=-20, in=125] to (1,-.67) [out=155, in=-20] to cycle
+          (0,0) [out=15, in=-135] to (1,.33) [out=-155, in=15] to cycle
+          (0,0) [out=-15, in=135] to (1,-.33) [out=155, in=-15] to cycle
+          (0,0) [out=-10, in=-175] to (1,0) [out=175, in=10] to cycle
+          ;
+        \begin{scope}[on background layer, inner sep=1pt]
+          \node [fill=gray!85, path fading=fade north, fit={(o) (ne)}] {};
+          \node [fill=gray!85, path fading=fade south, fit={(o) (se)}] {};
+          \node [draw=black, draw opacity=.75, fit={(o |- ne) (se)}] {};
+        \end{scope}
+      \end{tikzpicture}
+    }%
+  \end{minipage}\hfill
+  \begin{minipage}{.75\textwidth}
+    \kant[1]
+  \end{minipage}
+\end{document}

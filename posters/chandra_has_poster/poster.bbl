@@ -1,0 +1,56 @@
+\providecommand*{\mcitethebibliography}{\thebibliography}
+\csname @ifundefined\endcsname{endmcitethebibliography}
+{\let\endmcitethebibliography\endthebibliography}{}
+\begin{mcitethebibliography}{5}
+\providecommand*{\natexlab}[1]{#1}
+\providecommand*{\mciteSetBstSublistMode}[1]{}
+\providecommand*{\mciteSetBstMaxWidthForm}[2]{}
+\providecommand*{\mciteBstWouldAddEndPuncttrue}
+  {\def\EndOfBibitem{\unskip.}}
+\providecommand*{\mciteBstWouldAddEndPunctfalse}
+  {\let\EndOfBibitem\relax}
+\providecommand*{\mciteSetBstMidEndSepPunct}[3]{}
+\providecommand*{\mciteSetBstSublistLabelBeginEnd}[3]{}
+\providecommand*{\EndOfBibitem}{}
+\mciteSetBstSublistMode{f}
+\mciteSetBstMaxWidthForm{subitem}
+{(\emph{\alph{mcitesubitemcount}})}
+\mciteSetBstSublistLabelBeginEnd{\mcitemaxwidthsubitemform\space}
+{\relax}{\relax}
+
+\bibitem[Has(2018)]{hasc18}
+C.~Has, \emph{Ph.D. thesis}, 2018, IIT Bombay, Chemical Engineering\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Has and Sunthar(2019)]{has2019comprehensive}
+C.~Has and P.~Sunthar, \emph{J Liposome Res}, 2019,  1--30\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Jaafar-Maalej \emph{et~al.}(2011)Jaafar-Maalej, Charcosset, and
+  Fessi]{jaafar2011new}
+C.~Jaafar-Maalej, C.~Charcosset and H.~Fessi, \emph{J Liposome Res}, 2011,
+  \textbf{21}, 213--220\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Has \emph{et~al.}(2018)Has, Phapal, and Sunthar]{has2018rapid}
+C.~Has, S.~M. Phapal and P.~Sunthar, \emph{Chem Phys Lipids}, 2018,
+  \textbf{212}, 144--151\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Sorkin \emph{et~al.}(2018)Sorkin, Huisjes,
+  Bo{\v{s}}kovi{\'c},\emph{et~al.}]{sorkin2018nanomechanics}
+R.~Sorkin, R.~Huisjes, F.~Bo{\v{s}}kovi{\'c} \emph{et~al.}, \emph{Small}, 2018,
+  \textbf{14}, 1801650\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\end{mcitethebibliography}

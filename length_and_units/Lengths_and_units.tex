@@ -1,0 +1,76 @@
+\documentclass{article}
+
+
+\begin{document}
+
+\section*{Important tips and tricks:}
+\begin{enumerate}
+\item New paragraphs can be sepecified by: \\
+$\verb|\\, \par, blank line|$ (recommended way)
+\item Little extra space addition: \\
+$I = \int e^x\, dx $ \hfil \checkmark \\
+$I = \int e^x dx $ \hfil $\times$
+\item Align (recommended way) vs eqnarray
+\item Functions name: \\
+$\log, \ln, \sin, \cos, \tan, \cosec^*, \exp$ \hfil \checkmark \\
+$log, ln, sin, cos, tan, cosec, exp$ \hfil $\times$ \\
+*declared math operator
+\item Dots: \\
+As mentioned\ldots \hfil \checkmark \\
+As mentioned... \hfill $\times$
+\item Page ranges: \\
+--\hfil \checkmark \\
+- \hfil $\times$
+
+\item Avoid using these commands: \\
+$\verb|\newline, \bigskip, \medskip, \smallskip,|$ \\
+$\verb|\pagebreak, \linebreak|$
+
+\item Cross referencing commands \\
+$\verb|\ref{}, \eqref{}, \pageref{},|$ \\
+$\verb|\cref{}, \Cref{}, \crefrange{}, \Crefrange{}|$
+
+\item Using angle brackets \\
+Never simply insert $\verb|<|$ while using inputenc package with utf8 encoding. Always use fontenc package with T1 fonts encoding if you feel the need to use angle brackets.
+
+\item Inverted commas \\
+For quoting some text, load $\verb|\usepackage{csquote}|$ package and use $\verb|\enquote{---}|$
+
+\item Specifying blank lines
+Out of $\verb|\\, \par, blank line|$, latter is the recommended style.
+
+\item Getting verbatim
+\noindent Prefixing macros with $\verb|\the|$ displays it's values. For example:
+
+  \noindent baselineskip: \the\baselineskip \\
+  % baselinewskip: \the\baselinewskip \\
+  % baselinestretch: \the\baselinestretch \\
+  columnsep: \the\columnsep \\
+  columnwidth: \the\columnwidth \\
+  unitlength: \the\unitlength \\
+  linewidth: \the\linewidth \\
+  textwidth: \the\textwidth \\
+  textheight: \the\textheight \\
+  evensidemargin: \the\evensidemargin \\
+  oddsidemargin: \the\oddsidemargin \\
+  paperwidth: \the\paperwidth \\
+  paperheight: \the\paperheight \\
+  parindent: \the\parindent \\
+  parskip: \the\parskip \\
+  tabcolsep: \the\tabcolsep \\
+  topmargin: \the\topmargin
+ 
+  % these codes all print a line paragraph that fills the entire line with "hrule" or "dot" between words.
+   \noindent Deependra\hrulefill Dhakal \\
+   \null \noindent Deependra\dotfill Dhakal \\
+   \noindent Deependra\hrulefill Dhakal\null \\
+  % this code makes a one-line paragraph that puts 'Name:' an inch from the right margin.
+   \noindent\makebox[\linewidth]{\hspace{\fill}Name:\hspace{1in}}
+ 
+ a\hfill b\vfill
+ 
+ b\hfill a
+
+\end{enumerate}
+
+\end{document}

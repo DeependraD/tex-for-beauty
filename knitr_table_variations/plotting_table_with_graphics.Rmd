@@ -1,0 +1,77 @@
+---
+title: "Plotting table with graphics"
+output: pdf_document
+---
+
+This example highlights the issue with formatting a nice table with the graphics and the vertical alignment of text.
+
+```{r echo=FALSE, results='hide', warning=FALSE, message=FALSE}
+## Load modules
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+## Create a local function to plot the z score
+varianceChart <- function(df, personNumber) {
+  plot <- df %>%
+             filter(n == personNumber) %>%
+             ggplot() +
+             aes(x=zscore, y=0) +
+             geom_rect(aes(xmin=-3.32, xmax=-1.96, ymin=-1, ymax=1), fill="orange2", alpha=0.8) + 
+             geom_rect(aes(xmin=1.96, xmax=3.32, ymin=-1, ymax=1), fill="olivedrab3", alpha=0.8) +
+             geom_rect(aes(xmin=min(-4, zscore), xmax=-3.32, ymin=-1, ymax=1), fill="orangered3") + 
+             geom_rect(aes(xmin=3.32, xmax=max(4, zscore), ymin=-1, ymax=1), fill="chartreuse4") +
+             theme(axis.title = element_blank(), 
+                   axis.ticks = element_blank(), 
+                   axis.text = element_blank(),
+                   panel.grid.minor = element_blank(),
+                   panel.grid.major = element_blank()) +
+                   geom_vline(xintercept=0, colour="black", alpha=0.3) +
+                   geom_point(size=15, shape=4, fill="lightblue") ##Cross looks better than diamond
+  return(plot)
+}
+
+## Create dummy data
+Person1 <- rnorm(1, mean=10, sd=2) 
+Person2 <- rnorm(1, mean=10, sd=2)
+Person3 <- rnorm(1, mean=10, sd=2)
+Person4 <- rnorm(1, mean=10, sd=2) 
+Person5 <- rnorm(1, mean=10, sd=2) 
+Person6 <- rnorm(1, mean=6,  sd=1) 
+
+## Add to data frame
+df <- data.frame(Person1, Person2, Person3, Person4, Person5, Person6)
+
+## Bring all samples into one column and then calculate stats
+df2  <- df %>% gather(key=Person, value=time)
+mean <- mean(df2$time)
+sd   <- sqrt(var(df2$time))
+
+stats <- df2 %>%
+             mutate(n = row_number()) %>%
+             group_by(Person) %>%
+             mutate(zscore = (time - mean) / sd)
+
+graph_directory <- paste0(getwd(), "/images")
+
+## Now to cycle through each Person and create a graph
+for(i in seq(1, nrow(stats))) {
+  print(i)
+  varianceChart(stats, i)
+
+  ggsave(sprintf("%s/%s.png", graph_directory, i), plot=last_plot(), units="mm", width=100, height=20, dpi=1200)
+}
+
+## add a markup reference to this dataframe
+stats$varianceChart <- sprintf('\\raisebox{-.4\\totalheight}{\\includegraphics[width=0.2\\textwidth, height=20mm]{%s/%s.png}}', graph_directory, stats$n) 
+
+df.table <- stats[, c(1,2,5)]
+colnames(df.table) <- c("Person Name", "Time taken", "Variance Chart")
+```
+
+
+```{r}
+library(knitr)
+kable(df.table[, c(1,2)], caption="Rows look neat and a sensible distance apart")
+kable(df.table, caption="Rows are separated a long way apart and images and text are misaligned")
+```

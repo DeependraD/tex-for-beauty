@@ -1,0 +1,238 @@
+---
+title: "Star annotated correlation table"
+author: "Deependra Dhakal"
+date: "`r Sys.Date()`"
+output: 
+  bookdown::pdf_document2:
+    toc: yes
+    toc_depth: 3
+    keep_tex: yes
+    includes:
+      in_header: preamble.tex
+
+---
+
+```{r setup, echo=FALSE, warning=FALSE}
+suppressPackageStartupMessages(require(tidyverse))
+suppressPackageStartupMessages(library(xtable))
+suppressPackageStartupMessages(require(Hmisc))
+knitr::opts_chunk$set(tidy = TRUE, cache = TRUE, 
+                      echo = FALSE, 
+                      tidy.opts = list(width.cutoff=50), 
+                      eval = TRUE, 
+                      fig.show = "hold", 
+                      fig.align = "center", 
+                      fig.asp = 0.6)
+options(knitr.kable.NA = "", digits = 3)
+```
+
+# Using `knitr::kable()` and `xtable::xtable()`
+
+The examples below shows custom formatted tables useable for long and wide table scenarios.
+
+```{r load-set-go4}
+
+fact_enc <- c("Before booting" = "0", 
+              "Booting minus" = "bm", "Booting" = "b", "Booting plus" = "bp", 
+              "Swollen boot minus" = "fm", "Swollen boot" = "f", "Swollen boot plus" = "fp", 
+              "Awns appearing minus" = "am", "Awns appearing" = "a", "Awns appearing plus" = "ap", 
+              "Spikes appearing minus" = "sm", "Spikes appearing" = "s", "Spikes appearing plus" = "sp", 
+              "One fourth of spikes appeared minus" = "1m", "One fourth of spikes appeared" = "1", "One fourth of spikes appeared plus" = "1p", 
+              "Half spikes appeared minus" = "2m", "Half spikes appeared" = "2", "Half spikes appeared plus" = "2p", 
+              "Three fourth of spikes appeared minus" = "3m", "Three fourth of spikes appeared" = "3", "Three fourth of spikes appeared plus" = "3p", 
+              "Spikes have fully emerged minus" = "4m", "Spikes have fully emerged" = "4", "Spikes have fully emerged plus" = "4p", 
+              "Anthesis stage I minus" = "10m", "Anthesis stage I" = "10", "Anthesis stage I plus" = "10p", 
+              "Anthesis stage II minus" = "11m", "Anthesis stage II" = "11", "Anthesis stage II plus" = "11p",  
+              "Anthesis stage III minus" = "12m", "Anthesis stage III" = "12", "Anthesis stage III plus" = "12p", 
+              "Anthesis stage IV minus" = "13m", "Anthesis stage IV" = "13", "Anthesis stage IV plus" = "13p", 
+              "Anthesis advanced minus" = "14m", "Anthesis advanced" = "14", "Anthesis advanced plus" = "14p")
+
+fact_enc <- factor(fact_enc, levels = unique(fact_enc), 
+                   labels = names(fact_enc), ordered = TRUE)
+
+fact_enc2 <- c("Late anthesis" = "0", 
+               # "Watery stage minus" = "1mm", 
+               "Watery stage minus" = "1m", "Watery stage" = "1", 
+               "Watery stage plus" = "1p", 
+               "Milky stage minus" = "2m", "Milky stage" = "2", 
+               "Milky stage plus" = "2p",
+               "Soft dough stage minus" = "3m", "Soft dough stage" = "3", 
+               "Soft dough stage plus" = "3p",
+               "Hard dough stage" = "4")
+fact_enc2 <- factor(fact_enc2, levels = unique(fact_enc2), labels = names(fact_enc2), ordered = TRUE)
+
+all_data <- readxl::read_xlsx("./data/with_misses.xlsx", 
+                              sheet = "yield_manip", na = c("", "NA"), 
+                              range = "A1:CG239") %>% 
+  mutate_at(.vars = c("row", "col", "rowgroup", "colgroup", "plot", "lin_check", "plant_pop"), factor) %>% 
+  bind_cols(suppressMessages(read_csv("./data/heading_booting_dates.csv"))) %>% 
+  bind_cols(suppressMessages(read_csv("./data/heading-booting-chilling2.csv", col_names = T)) %>%
+              mutate_at(vars(Jan_23_2017:Feb_06_2017),
+                        function(x)factor(x, levels = names(fact_enc), ordered = TRUE)) %>%
+              mutate_at("Feb_23_2017",
+                        function(x)factor(x, levels = names(fact_enc2), ordered = TRUE)) %>% 
+               select(-plot, -lin_check, -contains("Chilling"), -contains("disease_over")) %>% 
+              slice(-c(36, 172))) %>% 
+  mutate(plht = rowMeans(.[, c("height1", "height2", "height3")], na.rm = TRUE),
+         lar = length * breadth,
+         ctd = Ambient_Temperature_Feb23 - ctd1_2, 
+         Genotype = as_factor(Genotype)) %>% 
+  select(lin_check, Genotype,
+         rowgroup, colgroup,
+         row, col,
+         yield7,
+         panicle_len7,
+         thou_grain_wt7,
+         grain_per_pan7,
+         effective_tiller7, 
+         stringr::str_subset(colnames(.), "dis_")[-1],
+         stringr::str_subset(colnames(.), "green"),
+         stringr::str_subset(colnames(.), "LAUG"), 
+         plht, lar, ctd,
+         chl_ind1_2, chl_ind2_2,
+         days_to_head, days_to_anth, 
+         Jan_23_2017:Feb_06_2017, Feb_23_2017)
+```
+
+
+```{r corstars-function}
+
+# This function annotates the correlation coefficients 
+# with the stars corresponding to the level of significance
+# x is a matrix containing the data
+# method : correlation method. "pearson"" or "spearman"" is supported
+# removeTriangle : remove upper or lower triangle
+# results : "html" or "latex" (default)
+# align: a vector of alignment values as is specified in xtable(x, align)
+
+large <- function(x){
+paste0('{\\footnotesize{\\bfseries ', x, '}}')
+}
+
+corstars <-function(x, align, method=c("pearson", "spearman"), removeTriangle=c("upper", "lower"),
+                     result=c("none", "html", "latex")){
+    #Compute correlation matrix
+    require(Hmisc)
+    x <- as.matrix(x)
+    correlation_matrix<-rcorr(x, type=method[1])
+    R <- correlation_matrix$r # Matrix of correlation coeficients
+    p <- correlation_matrix$P # Matrix of p-value 
+    
+    ## Define notions for significance levels; spacing is important.
+    mystars <- ifelse(p < .0001, "****", ifelse(p < .001, "*** ", ifelse(p < .01, "**  ", ifelse(p < .05, "*   ", "    "))))
+    
+    ## trunctuate the correlation matrix to two decimal
+    R <- format(round(cbind(rep(-1.11, ncol(x)), R), 2))[,-1]
+    
+    ## build a new matrix that includes the correlations with their apropriate stars
+    Rnew <- matrix(paste(R, mystars, sep=""), ncol=ncol(x))
+    diag(Rnew) <- paste(diag(R), " ", sep="")
+    rownames(Rnew) <- colnames(x)
+    colnames(Rnew) <- paste(colnames(x), "", sep="")
+    
+    ## remove upper triangle of correlation matrix
+    if(removeTriangle[1]=="upper"){
+      Rnew <- as.matrix(Rnew)
+      Rnew[upper.tri(Rnew, diag = TRUE)] <- ""
+      Rnew <- as.data.frame(Rnew)
+    }
+    
+    ## remove lower triangle of correlation matrix
+    else if(removeTriangle[1]=="lower"){
+      Rnew <- as.matrix(Rnew)
+      Rnew[lower.tri(Rnew, diag = TRUE)] <- ""
+      Rnew <- as.data.frame(Rnew)
+    }
+    
+    ## remove last column and return the correlation matrix
+    Rnew <- cbind(Rnew[1:length(Rnew)-1])
+    if (result[1]=="none") return(Rnew)
+    else{
+      if(result[1]=="html") print(xtable(Rnew), type="html", comment = FALSE)
+      else print(xtable(Rnew, auto = TRUE,  align = align), type="latex", 
+                 comment = FALSE, size = "\\small", 
+                 sanitize.colnames.function = large, 
+                 booktabs = TRUE, tabular.environment="longtable", 
+                 floating=FALSE)
+    }
+} 
+```
+
+
+Table \@ref(tab:plot-starred-corr) is the table of correlation between variables and Table \@ref(tab:cornew1).
+
+\blandscape
+
+```{r plot-starred-corr, results='asis'}
+# mcor<-round(cor(mtcars),2)
+# 
+# # Hide upper triangle
+# upper<-mcor
+# upper[upper.tri(mcor)]<-""
+# upper<-as.data.frame(upper)
+# upper
+# 
+# #Hide lower triangle
+# lower<-mcor
+# lower[lower.tri(mcor, diag=TRUE)]<-""
+# lower<-as.data.frame(lower)
+# lower
+
+cortable <- corstars(all_data %>% 
+           select_if(is.numeric) %>% 
+           rename_all(function(x)stringr::str_replace_all(x, c("_" = " ", "7(?!\\d)" = "")) %>% str_to_title()) %>% 
+           rename(`Chl Ind1` = `Chl Ind1 2`, `Chl Ind2` = `Chl Ind2 2`), result="none") 
+
+
+cortable[,1:9] %>% 
+  knitr::kable(format = "latex", caption = "Correlation coefficients of numeric response variables observed in study", booktabs = TRUE, longtable = TRUE) %>% 
+  kableExtra::kable_styling(font_size = 9) %>% 
+  kableExtra::column_spec(1:9, width = "0.12\\\\textwidth") %>% 
+  kableExtra::row_spec(0, bold = TRUE) %>% 
+  kableExtra::column_spec(0, bold = TRUE)
+
+cat("\\addtocounter{table}{-1}")
+
+cortable[,-c(1:9)] %>% 
+  knitr::kable(format = "latex", caption = "Correlation coefficients of numeric response variables observed in study (...continued)", booktabs = TRUE, longtable = TRUE) %>% 
+  kableExtra::kable_styling(font_size = 9) %>% 
+  kableExtra::column_spec(1:9, width = "0.12\\\\textwidth") %>% 
+  kableExtra::row_spec(0, bold = TRUE) %>% 
+  kableExtra::column_spec(0, bold = TRUE)
+
+print(xtable(cortable[,1:9], auto = TRUE,
+             align=c("C{0.15\\textwidth}|", rep("C{0.12\\textwidth}", times = 9)),
+             caption = "Correlation\\label{tab:cornew1} coefficients of numeric response variables observed in study"),
+      type="latex",
+      comment = FALSE, size = "\\small",
+      sanitize.colnames.function = large,
+      booktabs = TRUE, tabular.environment="longtable",
+      floating=FALSE, caption.placement = "top")
+
+cat("\\addtocounter{table}{-1}")
+
+
+print(xtable(cortable[,-c(1:9)], auto = TRUE,
+             align=c("C{0.15\\textwidth}|", rep("C{0.12\\textwidth}", times = 8)),
+             caption = "Correlation\\label{tab:cornew1} coefficients of numeric response variables observed in study (...continued)"),
+      type="latex",
+      comment = FALSE, size = "\\small",
+      sanitize.colnames.function = large,
+      booktabs = TRUE, tabular.environment="longtable",
+      floating=FALSE, caption.placement = "top")
+
+```
+
+\elandscape
+
+<!-- \begin{table} -->
+<!-- \caption[Short caption]{The main caption of the table.} -->
+<!-- \label{tab:mtcars} -->
+<!-- \centering -->
+
+<!-- ```{r} -->
+<!-- stargazer::stargazer(mtcars[1:5, 1:3], summary = FALSE,float=F) -->
+<!-- ``` -->
+
+
+<!-- \end{table} -->

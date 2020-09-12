@@ -1,0 +1,245 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Star annotated correlation table},
+            pdfauthor={Deependra Dhakal},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{Star annotated correlation table}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \author{Deependra Dhakal}
+  \preauthor{\centering\large\emph}
+  \postauthor{\par}
+  \predate{\centering\large\emph}
+  \postdate{\par}
+  \date{2018-03-29}
+
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage[table]{xcolor}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage[normalem]{ulem}
+\usepackage{xcolor}
+\usepackage{rotating}  
+\newcommand{\blandscape}{\begin{landscape}}
+\newcommand{\elandscape}{\end{landscape}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+\section{Using xtable}\label{using-xtable}
+
+Table \ref{tab:plot-starred-corr} is the table of correlation between
+variables and Table \ref{tab:cornew1}.
+
+\blandscape
+
+\begingroup\fontsize{9}{11}\selectfont
+
+\begin{longtable}[t]{>{\raggedright\arraybackslash}p{0.12\textwidth}>{\raggedright\arraybackslash}p{0.12\textwidth}>{\raggedright\arraybackslash}p{0.12\textwidth}>{\raggedright\arraybackslash}p{0.12\textwidth}>{\raggedright\arraybackslash}p{0.12\textwidth}>{\raggedright\arraybackslash}p{0.12\textwidth}>{\raggedright\arraybackslash}p{0.12\textwidth}>{\raggedright\arraybackslash}p{0.12\textwidth}>{\raggedright\arraybackslash}p{0.12\textwidth}l}
+\caption{\label{tab:plot-starred-corr}Correlation coefficients of numeric response variables observed in study}\\
+\toprule
+\textbf{ } & \textbf{Yield} & \textbf{Panicle Len} & \textbf{Thou Grain Wt} & \textbf{Grain Per Pan} & \textbf{Effective Tiller} & \textbf{Dis March15} & \textbf{Greenness Z65} & \textbf{Greenness Z75} & \textbf{Greenness Z85}\\
+\midrule
+Yield &  &  &  &  &  &  &  &  & \\
+Panicle Len & 0.13 &  &  &  &  &  &  &  & \\
+Thou Grain Wt & 0.20** & -0.05 &  &  &  &  &  &  & \\
+Grain Per Pan & 0.32**** & 0.41**** & 0.00 &  &  &  &  &  & \\
+Effective Tiller & 0.56**** & -0.06 & -0.10 & -0.03 &  &  &  &  & \\
+\addlinespace
+Dis March15 & -0.08 & -0.17* & 0.00 & -0.05 & -0.06 &  &  &  & \\
+Greenness Z65 & -0.09 & -0.09 & -0.06 & -0.01 & 0.10 & -0.14* &  &  & \\
+Greenness Z75 & 0.10 & 0.20** & 0.11 & 0.18** & -0.19** & -0.18** & -0.07 &  & \\
+Greenness Z85 & 0.07 & 0.12 & 0.09 & 0.07 & -0.10 & -0.15* & 0.37**** & 0.77**** & \\
+Laug 65 75 & 0.35**** & 0.19** & 0.06 & 0.20** & 0.07 & -0.16* & 0.17** & 0.82**** & 0.75****\\
+\addlinespace
+Laug 75 85 & 0.08 & 0.12 & 0.16* & 0.02 & -0.16* & -0.14* & 0.13 & 0.87**** & 0.85****\\
+Plht & -0.07 & 0.06 & -0.13 & -0.01 & -0.07 & -0.07 & -0.02 & 0.07 & 0.10\\
+Lar & -0.04 & 0.18** & 0.04 & 0.10 & -0.02 & -0.08 & -0.11 & 0.10 & 0.03\\
+Ctd & 0.04 & -0.20** & -0.01 & -0.08 & 0.11 & -0.10 & -0.01 & -0.20** & -0.14*\\
+Chl Ind1 & 0.23** & 0.11 & 0.11 & 0.16* & -0.03 & -0.22*** & 0.10 & 0.18** & 0.18**\\
+\addlinespace
+Chl Ind2 & 0.05 & 0.26**** & -0.02 & 0.14* & 0.02 & -0.41**** & 0.05 & 0.17** & 0.14*\\
+Days To Head & -0.13 & -0.07 & -0.02 & -0.12 & 0.04 & -0.06 & 0.30**** & -0.45**** & -0.17**\\
+Days To Anth & -0.13 & -0.11 & -0.03 & -0.18** & 0.07 & -0.10 & 0.29**** & -0.45**** & -0.17**\\
+\bottomrule
+\end{longtable}
+
+\endgroup{}
+
+\addtocounter{table}{-1}\begingroup\fontsize{9}{11}\selectfont
+
+\begin{longtable}[t]{>{\raggedright\arraybackslash}p{0.12\textwidth}>{\raggedright\arraybackslash}p{0.12\textwidth}>{\raggedright\arraybackslash}p{0.12\textwidth}>{\raggedright\arraybackslash}p{0.12\textwidth}>{\raggedright\arraybackslash}p{0.12\textwidth}>{\raggedright\arraybackslash}p{0.12\textwidth}>{\raggedright\arraybackslash}p{0.12\textwidth}>{\raggedright\arraybackslash}p{0.12\textwidth}>{\raggedright\arraybackslash}p{0.12\textwidth}}
+\caption{\label{tab:plot-starred-corr}Correlation coefficients of numeric response variables observed in study (...continued)}\\
+\toprule
+\textbf{ } & \textbf{Laug 65 75} & \textbf{Laug 75 85} & \textbf{Plht} & \textbf{Lar} & \textbf{Ctd} & \textbf{Chl Ind1} & \textbf{Chl Ind2} & \textbf{Days To Head}\\
+\midrule
+Yield &  &  &  &  &  &  &  & \\
+Panicle Len &  &  &  &  &  &  &  & \\
+Thou Grain Wt &  &  &  &  &  &  &  & \\
+Grain Per Pan &  &  &  &  &  &  &  & \\
+Effective Tiller &  &  &  &  &  &  &  & \\
+\addlinespace
+Dis March15 &  &  &  &  &  &  &  & \\
+Greenness Z65 &  &  &  &  &  &  &  & \\
+Greenness Z75 &  &  &  &  &  &  &  & \\
+Greenness Z85 &  &  &  &  &  &  &  & \\
+Laug 65 75 &  &  &  &  &  &  &  & \\
+\addlinespace
+Laug 75 85 & 0.76**** &  &  &  &  &  &  & \\
+Plht & 0.04 & 0.06 &  &  &  &  &  & \\
+Lar & 0.08 & 0.07 & 0.10 &  &  &  &  & \\
+Ctd & -0.17** & -0.15* & 0.04 & -0.02 &  &  &  & \\
+Chl Ind1 & 0.19** & 0.19** & -0.10 & 0.04 & -0.10 &  &  & \\
+\addlinespace
+Chl Ind2 & 0.14* & 0.15* & 0.20** & 0.11 & 0.09 & 0.26**** &  & \\
+Days To Head & -0.29**** & -0.31**** & 0.11 & 0.07 & 0.17** & 0.13* & 0.24*** & \\
+Days To Anth & -0.29**** & -0.29**** & 0.09 & 0.08 & 0.23*** & 0.09 & 0.26**** & 0.93****\\
+\bottomrule
+\end{longtable}\endgroup{}
+
+\begingroup\small
+
+\begin{longtable}{C{0.15\textwidth}|C{0.12\textwidth}C{0.12\textwidth}C{0.12\textwidth}C{0.12\textwidth}C{0.12\textwidth}C{0.12\textwidth}C{0.12\textwidth}C{0.12\textwidth}C{0.12\textwidth}}
+\caption{Correlation\label{tab:cornew1} coefficients of numeric response variables observed in study} \\ 
+  \toprule
+ & {\footnotesize{\bfseries Yield}} & {\footnotesize{\bfseries Panicle Len}} & {\footnotesize{\bfseries Thou Grain Wt}} & {\footnotesize{\bfseries Grain Per Pan}} & {\footnotesize{\bfseries Effective Tiller}} & {\footnotesize{\bfseries Dis March15}} & {\footnotesize{\bfseries Greenness Z65}} & {\footnotesize{\bfseries Greenness Z75}} & {\footnotesize{\bfseries Greenness Z85}} \\ 
+  \midrule
+Yield &  &  &  &  &  &  &  &  &  \\ 
+  Panicle Len &  0.13     &  &  &  &  &  &  &  &  \\ 
+  Thou Grain Wt &  0.20**   & -0.05     &  &  &  &  &  &  &  \\ 
+  Grain Per Pan &  0.32**** &  0.41**** &  0.00     &  &  &  &  &  &  \\ 
+  Effective Tiller &  0.56**** & -0.06     & -0.10     & -0.03     &  &  &  &  &  \\ 
+  Dis March15 & -0.08     & -0.17*    &  0.00     & -0.05     & -0.06     &  &  &  &  \\ 
+  Greenness Z65 & -0.09     & -0.09     & -0.06     & -0.01     &  0.10     & -0.14*    &  &  &  \\ 
+  Greenness Z75 &  0.10     &  0.20**   &  0.11     &  0.18**   & -0.19**   & -0.18**   & -0.07     &  &  \\ 
+  Greenness Z85 &  0.07     &  0.12     &  0.09     &  0.07     & -0.10     & -0.15*    &  0.37**** &  0.77**** &  \\ 
+  Laug 65 75 &  0.35**** &  0.19**   &  0.06     &  0.20**   &  0.07     & -0.16*    &  0.17**   &  0.82**** &  0.75**** \\ 
+  Laug 75 85 &  0.08     &  0.12     &  0.16*    &  0.02     & -0.16*    & -0.14*    &  0.13     &  0.87**** &  0.85**** \\ 
+  Plht & -0.07     &  0.06     & -0.13     & -0.01     & -0.07     & -0.07     & -0.02     &  0.07     &  0.10     \\ 
+  Lar & -0.04     &  0.18**   &  0.04     &  0.10     & -0.02     & -0.08     & -0.11     &  0.10     &  0.03     \\ 
+  Ctd &  0.04     & -0.20**   & -0.01     & -0.08     &  0.11     & -0.10     & -0.01     & -0.20**   & -0.14*    \\ 
+  Chl Ind1 &  0.23**   &  0.11     &  0.11     &  0.16*    & -0.03     & -0.22***  &  0.10     &  0.18**   &  0.18**   \\ 
+  Chl Ind2 &  0.05     &  0.26**** & -0.02     &  0.14*    &  0.02     & -0.41**** &  0.05     &  0.17**   &  0.14*    \\ 
+  Days To Head & -0.13     & -0.07     & -0.02     & -0.12     &  0.04     & -0.06     &  0.30**** & -0.45**** & -0.17**   \\ 
+  Days To Anth & -0.13     & -0.11     & -0.03     & -0.18**   &  0.07     & -0.10     &  0.29**** & -0.45**** & -0.17**   \\ 
+   \bottomrule
+\end{longtable}
+
+\endgroup
+\addtocounter{table}{-1}\begingroup\small
+\begin{longtable}{C{0.15\textwidth}|C{0.12\textwidth}C{0.12\textwidth}C{0.12\textwidth}C{0.12\textwidth}C{0.12\textwidth}C{0.12\textwidth}C{0.12\textwidth}C{0.12\textwidth}}
+\caption{Correlation\label{tab:cornew1} coefficients of numeric response variables observed in study (...continued)} \\ 
+  \toprule
+ & {\footnotesize{\bfseries Laug 65 75}} & {\footnotesize{\bfseries Laug 75 85}} & {\footnotesize{\bfseries Plht}} & {\footnotesize{\bfseries Lar}} & {\footnotesize{\bfseries Ctd}} & {\footnotesize{\bfseries Chl Ind1}} & {\footnotesize{\bfseries Chl Ind2}} & {\footnotesize{\bfseries Days To Head}} \\ 
+  \midrule
+Yield &  &  &  &  &  &  &  &  \\ 
+  Panicle Len &  &  &  &  &  &  &  &  \\ 
+  Thou Grain Wt &  &  &  &  &  &  &  &  \\ 
+  Grain Per Pan &  &  &  &  &  &  &  &  \\ 
+  Effective Tiller &  &  &  &  &  &  &  &  \\ 
+  Dis March15 &  &  &  &  &  &  &  &  \\ 
+  Greenness Z65 &  &  &  &  &  &  &  &  \\ 
+  Greenness Z75 &  &  &  &  &  &  &  &  \\ 
+  Greenness Z85 &  &  &  &  &  &  &  &  \\ 
+  Laug 65 75 &  &  &  &  &  &  &  &  \\ 
+  Laug 75 85 &  0.76**** &  &  &  &  &  &  &  \\ 
+  Plht &  0.04     &  0.06     &  &  &  &  &  &  \\ 
+  Lar &  0.08     &  0.07     &  0.10     &  &  &  &  &  \\ 
+  Ctd & -0.17**   & -0.15*    &  0.04     & -0.02     &  &  &  &  \\ 
+  Chl Ind1 &  0.19**   &  0.19**   & -0.10     &  0.04     & -0.10     &  &  &  \\ 
+  Chl Ind2 &  0.14*    &  0.15*    &  0.20**   &  0.11     &  0.09     &  0.26**** &  &  \\ 
+  Days To Head & -0.29**** & -0.31**** &  0.11     &  0.07     &  0.17**   &  0.13*    &  0.24***  &  \\ 
+  Days To Anth & -0.29**** & -0.29**** &  0.09     &  0.08     &  0.23***  &  0.09     &  0.26**** &  0.93**** \\ 
+   \bottomrule
+\end{longtable}
+\endgroup
+
+\elandscape
+
+
+\end{document}

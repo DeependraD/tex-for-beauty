@@ -1,0 +1,6 @@
+\contentsline {section}{\numberline {1}Page display modes and table formatting hacks}{1}{section.1}
+\contentsline {subsection}{\numberline {1.1}Page display modes: portrait and landscape}{1}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}\texttt {xtable}: default and sidewaystable environments}{3}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}\texttt {xtable} workaround for landscape and portrait tables in same page}{3}{subsection.1.3}
+\contentsline {subsection}{\numberline {1.4}Long table with footnotes using \texttt {knitr::kable()}}{3}{subsection.1.4}
+\contentsline {subsection}{\numberline {1.5}Long table with footnotes using panodoc (default) syntax}{4}{subsection.1.5}

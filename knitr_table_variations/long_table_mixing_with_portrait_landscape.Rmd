@@ -1,0 +1,136 @@
+---
+title: "Long table mixing with portrait and landscape"
+output:
+    bookdown::pdf_document2:
+        keep_tex: yes
+        includes:
+            in_header: long_table_mixing_with_header.tex 
+---
+
+```{r setup, echo=FALSE, warning=FALSE}
+knitr::opts_chunk$set(tidy = TRUE, cache = TRUE, 
+                      echo = FALSE, 
+                      tidy.opts = list(width.cutoff=50), 
+                      eval = TRUE)
+options(knitr.kable.NA = "", digits = 3)
+suppressPackageStartupMessages(require(tidyverse))
+```
+
+# Page display modes and table formatting hacks
+
+## Page display modes: portrait and landscape
+
+- to get every pages in landscape mode, add: `classoption: landscape` to the yaml header.
+- `\blandscape` and `\elandscape` commands come from modifications of command in pdflscape package.
+- use \LaTeX\ `pdflscape` package instead of `lscape` package to get automatically rotated view of landscape pages in pdf viewer.
+
+Portrait page
+
+\begingroup
+\centering
+```{r}
+summary(cars)
+```
+\endgroup
+
+\newpage
+\blandscape
+
+Landscape page
+
+```{r}
+summary(cars)
+```
+
+\elandscape
+
+\newpage
+
+## `xtable`: default and sidewaystable environments
+
+- using sidewaystable environment requires `rotating` package to be used in latex preamble.
+
+Portrait table using `xtable` without sidewaystable environment is shown in Table \@ref(tab:xtab-without-sideways).
+
+```{r xtab-without-sideways, results='asis', echo=FALSE}
+print(xtable::xtable(summary(cars), caption="Portrait\\label{tab:xtab-without-sideways} table"), comment=FALSE)
+```
+
+Landscape table using `xtable` with sidewaystable environment is shown in Table \@ref(tab:xtab-with-sideways).
+
+```{r xtab-with-sideways, results='asis', echo=FALSE}
+print(xtable::xtable(summary(cars), caption="Landscape\\label{tab:xtab-with-sideways} table"),
+      floating.environment="sidewaystable", comment=FALSE)
+```
+
+
+## `xtable` workaround for landscape and portrait tables in same page
+
+Portrait table is shown in \@ref(tab:same-page-portrait).
+
+```{r same-page-portrait, results='asis', echo=FALSE}
+print(xtable::xtable(summary(cars), caption="Portrait\\label{tab:same-page-portrait} table"), comment=FALSE)
+```
+
+Landscape table is shown in \@ref(tab:same-page-landscape).
+
+```{r same-page-landscape, results='asis', echo=FALSE}
+cat(paste0(
+    "\\begin{table}[ht]\n\\centering\\rotatebox{90}{\n",
+    paste0(capture.output(
+      print(xtable::xtable(summary(cars)), floating=FALSE, comment=FALSE)),
+      collapse="\n"),
+    "} \n\\caption{Landscape\\label{tab:same-page-landscape} table}", "\n\\end{table}", collapse = "\n"))
+```
+
+
+## Long table with footnotes using `knitr::kable()`
+
+Long table formatted with footnote marks in the table using `knitr::kable()` is shown in Table \@ref(tab:check-vars-info1).
+
+```{r check-vars-info1, results='asis', warning=FALSE, message=FALSE}
+checks_data <- read_csv("./data/check-varieties-wheatatlas-info.csv", 
+                          na = c("Unknown", "No Info", "")) # chunk option message=FALSE
+knitr::kable(x = suppressWarnings(colnames(checks_data) %>% rbind(checks_data) %>% 
+               column_to_rownames(var = "Name") %>% 
+               t() %>% 
+               as.tibble() %>% 
+               rename("Characteristics" = "Name")), 
+             format = "latex", align = "c", 
+             booktabs = TRUE, 
+             escape = F,
+             longtable = TRUE,
+             caption = "A summary of check varieties used in the study") %>% 
+  kableExtra::kable_styling(latex_options = "striped", full_width = FALSE) %>% 
+  kableExtra::column_spec(1, width = "2.0cm") %>% 
+  kableExtra::column_spec(2:5, width = "3.4cm")
+```
+
+
+## Long table with footnotes using panodoc (default) syntax
+
+Four check varieties (Described in Table \@ref(tab:check-vars-info2)), released at different periods, adapted to a range of environmental conditions in Nepal were included alongside in the study.
+
+|    |Aditya^[http://wheatatlas.org/varieties/detail/22373]|Bhrikuti^[http://wheatatlas.org/varieties/detail/22378]|Gautam^[http://wheatatlas.org/varieties/detail/22383]|Tilottama^[http://wheatatlas.org/varieties/detail/26413]|
+|:--:|:----:|:------:|:----:|:-------:|
+|Year released|2010|1994\*|2002|2014|
+|Synonym|HD-2781\*|NL-623\*|BL-1887; NC-1838-4B-020B-020B-2B-0B\*|NL 1073; NL1073; NL-1073; FRANCOLIN; FRANKOLIN|
+|Wheat type|Bread|Bread|Bread|Bread|
+|Semidwarf (Rht gene)|No Info|Yes|Yes|Yes|
+|Grain color|White grain|Unknown|Unknown|Unknown|
+|Grain hardiness|Unknown|Unknown|Unknown|Unknown|
+|Pedigree|GS348/NL746//NL748; BOBWHITE/C-306/C-591/HW-2004\*|CONTESTADO/COCORAQUE F 75/3/POLLO//FURY/ANAHUAC F 75; CLEMENT/COCORAQUE-75/3/POLLO//FURY/ANAHUAC-75\*|SIDDHARTHA/NG 8319//NL 297 or SIDHHARTHA/NG 8319//NL 297|WAXWING*2/VIVITSI|
+|Selection history|HD-2781\*|NL 623 FR 2308-2F-1F-0F; NL-623\*|NC 1838-4B-020B-020B-2B-0B|CGSS-01-B-00056T-099Y-099M-099M-099Y-099M-14Y-0B\*|
+|Breeding program|Nepal Agriculture Research Council(NARC)|NARC|NARC|NARC|
+|CID (Cross ID)||251774|||
+|Accession number||K-63729\*|||
+|SID (Selection ID)||0|||
+|Origin|Cross made in the country, no CIMMYT parents|Advanced line from CIMMYT|Cross made in the country, one CIMMYT parent|Advanced line from CIMMYT|
+|CIMMYT breeding line||||FRANCOLIN|
+|Genes|Sr2\*; no-Lr34\*; Glu-A1b\*,Glu-B1i\*,Glu-D1a\*|Lr34\*; Glu-A1b\*,Glu-B1i\*,Glu-D1a\*||Sr2+|
+|Suitable megaenvironments|ME1|ME1, ME5|ME1, ME5||
+|Notes|Terai, Tars and Lower Valleys up to 500 500 masl; maturity 118 days, yield potential 4.8 t/ha||Irrigated, both normal and late sown condition of whole Terai, Taar and foot-hills (<500 m); maturity 105-115; potential yield - 5t/ha |Resistant to spot blotch. High tillering. Early maturing, stay green, excellent for bread and chapati.|
+|Resistance to Ug99 rust|No|No|No|Yes(including to Stem, Yellow and Leaf)|
+|Approximate acerage variety grown|38,263(2011-12)|153,055(2011-12)|||
+
+Table: (\#tab:check-vars-info2) A summary of check varieties used in the study

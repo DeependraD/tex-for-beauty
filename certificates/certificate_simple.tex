@@ -1,0 +1,29 @@
+% taken from: 
+% https://tex.stackexchange.com/a/46440/133229
+\documentclass[a4page]{article}
+\usepackage[left=2cm,right=2cm,bottom=2cm,top=2cm]{geometry}
+\usepackage{pdflscape}
+\usepackage{graphicx}
+\usepackage{times}
+\begin{document}
+% \pagenumbering{gobble} % either this or \pagestyle{empty} turns off page numbering
+\pagestyle{empty}
+\begin{landscape} % using \begin{center} ahead of this command adds extra page
+\begin{center}
+\fbox{\begin{minipage}{1.2\textwidth}
+\centering
+\vspace{1.5cm}
+
+\Huge{Letter of Experience for Nothing} \\
+
+\vspace{1.4cm}
+{\LARGE\itshape This is to certify the Mr. Nobody has been\\
+ a member of this site for two  years and has done Nothing.\par}
+ 
+\vspace{3cm}
+\hbox to 0.9\textwidth{\hfill\Large The Chief Member}
+\hbox to 0.9\textwidth{\hfill\Large\bfseries Signee}
+\end{minipage}}
+\end{center}
+\end{landscape}
+\end{document}

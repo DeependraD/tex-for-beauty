@@ -1,0 +1,81 @@
+---
+output: 
+  bookdown::pdf_document2:
+    keep_tex: yes
+header-includes:
+   - \usepackage{longtable}
+   - \usepackage{graphicx,subcaption}
+   - \usepackage{tabularx}
+   - \newcommand{\subfloat}[2][need a sub-caption]{\subcaptionbox{#1}{#2}}
+---  
+
+```{r fig-sub, fig.cap='two plots', fig.subcap=c('one plot this one subcaption is supposed to be really really really very long', 'the other one', 'the third one this one caption is not long enought to be wrapped around, I guess. But I could be wrong.', 'the fourth and the obstructive one', 'the fifth and sadistic one', 'the last but not the least one'), out.width='.49\\linewidth', fig.asp=1, fig.ncol = 2}
+plot(1:10)
+plot(1:10, 3:12)
+plot(rnorm(10), pch=19)
+plot(rnorm(10), pch=21)
+plot(rnorm(10), pch=12)
+plot(rnorm(10), pch=14)
+```
+
+\small{
+\begin{longtable}[]{@{}ll@{}}
+\caption{\label{tab:site-fact-tab}Site of study factsheet}\\
+\toprule
+\textbf{Particulars} & \textbf{Detail}\tabularnewline
+\midrule
+\endhead
+Institution & Agriculture and Forestry University\tabularnewline
+Farm & Rampur\tabularnewline
+State & Chitwan\tabularnewline
+Longitude & \(84.4^o\)\tabularnewline
+Latitude & \(27.62^o\)\tabularnewline
+Altitude & 191 meters\tabularnewline
+Environment & ME1\tabularnewline
+Dominant Soil(FAO classification) & Cambisols (Dystric
+Cambisols)\tabularnewline
+Surface pH & 5\tabularnewline
+Cropping system & Rice-wheat\tabularnewline
+\bottomrule
+\end{longtable}
+}
+
+
+```{r change-dep-var-labs, results='asis', echo=FALSE}
+carslin_mod <- lm(mpg ~ hp + cyl + disp + qsec, data = mtcars)
+stargazer::stargazer(carslin_mod, 
+                     type = "latex", 
+               title = "Model summary of mpg approximated by other variables", 
+               style = "all", digits = 2, header = FALSE, font.size = "small", 
+               column.labels = c("mpg"), 
+               model.names = TRUE, dep.var.labels.include = FALSE, 
+               report = "vc*sp", covariate.labels = c(letters[1:4]),
+               keep = c("hp", "cyl", "qsec"),
+               # coef = response_replace_coef[c(1, 2, 3)],
+               single.row = TRUE, df = FALSE, omit.stat = c("adj.rsq"),
+               column.sep.width = "1pt", float = FALSE)
+```
+
+
+```{r change-dep-var-labs2, results='asis', echo=FALSE, warning=FALSE, message=FALSE}
+require(tidyverse)
+mtcars1 <- mtcars
+mtcars1[,c("cyl", "vs", "am")] <- purrr::map_df(mtcars[,c("cyl", "vs", "am")], as.factor)
+
+carsmix_mod <- lme4::lmer(mpg ~ hp + (1 | cyl) + disp + qsec, data = mtcars1)
+carsmix_mod2 <- lme4::lmer(mpg ~ hp + (1 | cyl) + (1 | vs) + disp + qsec, data = mtcars1)
+carsmix_mod3 <- lme4::lmer(mpg ~ hp + (1 | am) + disp + vs + cyl, data = mtcars1)
+
+anova(carsmix_mod, 
+      carsmix_mod2, carsmix_mod3) %>% 
+  broom::tidy() %>% 
+  mutate(term = c("Blocking factors", 
+                  "Blocking factors + Entry genotypes", 
+                  "Blocking factors + Check and entry genotypes")) %>% 
+  knitr::kable(format = "latex", 
+               booktabs = TRUE, align = "l") %>% 
+  kableExtra::kable_styling(latex_options = "HOLD_position") %>% 
+  kableExtra::column_spec(1, width = "2.5cm")
+  
+```
+

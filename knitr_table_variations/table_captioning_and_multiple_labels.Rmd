@@ -1,0 +1,71 @@
+---
+title: "Table captioning and multiple tables in a code chunk"
+author: "Deependra Dhakal"
+date: "April 10, 2018"
+output: 
+  bookdown::pdf_document2:
+    keep_tex: yes
+header-includes:
+  - \usepackage{float}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+require(tidyverse)
+library(captioner)
+```
+
+
+There are three table obtained through `walk` here.
+
+Here first, I'm going to reference first table \@ref(tab:table-first), the second follows \@ref(tab:table-second).
+
+```{r, results="asis"}
+knitr::kable(head(iris), caption = "\\label{tab:table-first}Header data iris", format = "latex", booktabs = TRUE) %>% 
+  kableExtra::kable_styling(latex_options = c("HOLD_position"))
+
+knitr::kable(tail(iris), caption = "\\label{tab:table-second}Tail data iris", format = "latex", booktabs = TRUE) %>% 
+  kableExtra::kable_styling(latex_options = c("HOLD_position"))
+```
+
+Let us refer to Cylinder number 4 table as Table \@ref(tab:cyl4), Cylinder number 6 table as Table \@ref(tab:cyl6) and Cylinder number 8 table as Table \@ref(tab:cyl8).
+
+```{r three-tabs, results='asis'}
+mtcars %>% 
+  mutate(cyl = factor(cyl)) %>% 
+  group_by(cyl) %>% 
+  do(model = lm(mpg ~ hp, .)) %>% 
+  mutate(rsqu = summary(model)$`r.squared`) %>% 
+  broom::tidy(model) %>% 
+  split(f = .$cyl) %>% 
+  walk2(.y = c("\\label{tab:cyl4}This is cylinder number 4", 
+               "\\label{tab:cyl6}This is cylinder number 6", 
+               "\\label{tab:cyl8}This is cylinder number 8"), 
+        .f = ~ knitr::kable(.x, format = "latex", 
+                            booktabs = TRUE, 
+                            caption = .y, 
+                            align = "c") %>% 
+         kableExtra::kable_styling(position = "center", latex_options = "HOLD_position") %>% 
+         print())
+
+
+# mtcars %>% 
+#   group_by(cyl) %>% 
+#   do(model = lm(mpg ~ hp, .)) %>% 
+#   do(data.frame(
+#   var = names(coef(.$model)),
+#   coef(summary(.$model)))
+# )
+# 
+# models <- mtcars %>% 
+#   group_by(cyl) %>% 
+#   do(
+#   mod_linear = lm(mpg ~ disp, data = .),
+#   mod_quad = lm(mpg ~ poly(disp, 2), data = .)
+# )
+# 
+# models
+# compare <- models %>% do(aov = anova(.$mod_linear, .$mod_quad))
+# compare %>% mutate(p.value = aov$`Pr(>F)`[[2]])
+```
+
