@@ -5,6 +5,7 @@ latex: false
 pandoc: false
 warnings_are_errors: false
 cache:
+        packages: true
         directories:
                 - /tmp/texlive
                 - $HOME/.TinyTeX
