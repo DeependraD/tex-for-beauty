@@ -18,6 +18,7 @@ script:
         - Rscript -e 'tinytex::pdflatex("cv/Deependra_CV_simple.tex", bib_engine = "biber", engine_args = "--no-shell-escape")'
 branches:
           - master
+          - /v\d+\.\d+[a-z]/
 before_deploy:
       # Set up git user name and tag this commit
       - git config --local user.name "DeependraD"
