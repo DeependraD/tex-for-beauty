@@ -282,6 +282,3 @@ sympy-plots-for-*.tex/
 # WinEdt
 *.bak
 *.sav
-
-# Custom
-_build/
