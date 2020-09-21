@@ -3,7 +3,7 @@ title: "Post anthesis leaf health as potential determinant of yield in early eva
 author: Deependra Dhakal
 date: "9/15/2020"
 institute: |
-  \begin{minipage}{0.4\textwidth}\underline{Institution} \centering \newline Agriculture and Forestry University \end{minipage} \begin{minipage}{0.4\textwidth}\underline{Current affiliation} \centering \newline Gokuleshwor Agriculture and Animal Science College, TU \end{minipage}
+  | Agriculture and Forestry University, Chitwan, Nepal
   | \textit{ddhakal.rookie@gmail.com}
   | \url{https://rookie.rbind.io}
 output: 
@@ -23,21 +23,17 @@ knitr::opts_chunk$set(echo = FALSE)
 
 <!-- ## Abstract -->
 
-<!-- \footnotesize -->
-
 <!-- Recent advances in phenotyping and statistical techniques have enabled exploration of a large number of trait in a greater depth. Current study undertaken in Agriculture and Forestry University, Rampur, Chitwan highlights use of augmented row-column design for a small number of checks for estimation of genotypes' effect under a mixed modeling framework to uncovering association of wheat crops' yield with the traits characterizing its leaf health (resistance to foliar disease, flag leaf greenness, leaf area under greenness (LAUG) and flag leaf relative chlorophyll content. Even though significant genotypes' effects were found for most traits, few yield component traits along with a number of crop architecture traits -- thousand kernel weight, plant height, flag leaf area, canopy temperature depression, days to heading and days to anthesis -- had significant variation due to blocking or environmental factors. Major leaf health traits that influenced yield were the leaf greenness and relative chlorophyll content. BLUP estimation and adjustment for fixed effects dictate that 68.9\% of the genotypic variation of entry genotypes in yield was explained by the full model (one having both blocking and leaf health components). This reveals that augmenting leaf health traits with structured blocking factors leads to improved yield estimates. Apart from the check variety Aditya, which gave the lowest yield ( $3.02 \pm 0.61$ \si{\tonne\per\hectare}), all other check varieties were similar (3.54 \si{\tonne\per\hectare}, 3.33 \si{\tonne\per\hectare}, 3.42 \si{\tonne\per\hectare}). However, they had more contrasting differences in Number of tillers \si{\per\meter^{2}}. Findings based on block adjusted random effect estimates suggest for inclusion of some entry genotypes, those having leaf traits characterizing good health and with high yielding characters, in advanced evaluation trials. Top ranking high yielding entry genotypes were: TRCH/SRTU//KACHU/3/KINGBIRD\#1, WHEAR/SOKOLL/4/PASTOR// MILAN/KAUZ/3/B $\ldots$ and MUNAL \#1*2/4/HUW234+ LR34/PRINIA//PBW3 $\ldots$ -->
 
-\footnotesize
+<!-- \footnotesize -->
 
-Post-anthesis foliar health could be a proxy for determining final grain yield. It has a direct implication on grain filling behavior of a plant. Ideally, the contribution of pre-anthesis photosynthetic reserves to the final grain yield has been found to stall around 5\% to 10\% [@sharma1992duration]. A major fraction of total yield, therefore, is dependent upon the photosynthesis that occurs post-anthesis. Terminal leaves, particularly the flag leaf and the one directly below it, have significant contribution to genotypic variation in yield [@aslam1978photosynthesis] with respect to provisioning of assimilate to functionally active parts of plants including the storage organ(grain). Similarly, it is well known that various biotic agents, primarily diseases, sustain reduction in yield with pathways that relate to the effective photosynthetic surface area [@lopes2012stay].
-
-Current study aims to make use of "augmented row-column design for a small number of checks" for estimation of genotypes' effect under a mixed modeling framework to uncovering association of wheat crops' yield with the traits characterizing its leaf health.
+Post-anthesis foliar health could serve as a proxy for determining final grain yield, as the role of terminal leaves has been well described for having implications in grain fill. A major fraction of total yield is dependent upon the photosynthesis that occurs post-anthesis. Similarly, it is well known that biotic agents such as diseases sustain reduction in yield via pathways that relate to the reduction of effective photosynthetic surface area [@lopes2012stay].
 
 ## Materials and methods
 
-\footnotesize
+<!-- \footnotesize -->
 
-Test material consisted of 104 diverse lines representing advanced genotypes screened for resistance to various diseases. Four check varieties – Aditya, Bhrikuti, Gautam and Tilottama -- released by NARC and adapted to a wide range of environmental conditions of Nepal were included alongside. Observations were kept for final yield and associated as well as morpho-phenological traits, that were potentially prolonging the leaf health during post-anthesis period.
+Test material consisted of 104 diverse lines representing advanced genotypes screened for moderate resistance to various diseases and four NARC, Nepal released check varieties – Aditya, Bhrikuti, Gautam and Tilottama.
 
 Field was sown in Nov 24, 2016. Seeds were continuously sown within a row while maintaining standard 25 cm row-row distance. Field was divided into rectangular grid to assign genotypes into rows, columns, rowgroups and columngroup. Each plot occupied 1 \si{\meter^2} in the grid.
 <!-- The irrigation was scheduled to best avoid pre-antheis moisture stress, as this has been implied in largest losses resulting in number of fertile florets and the final grain weight [@innes1981effect].  -->
@@ -45,14 +41,32 @@ Standard interculture operations were followed with none pesticidal sprays.
 
 ##
 
-At least four plant hills per plot were sampled for observations except when visually scoring, in which case more than 50% canopy coverage was examined. Features like soil temperature and soil moisture formed basis for environmental covariate adjustment.
+\begin{columns}
 
-Observational traits were categorized into three underlying features: 
+\column{0.5\textwidth}
+\footnotesize
+Observed traits were categorized into three categories: 
 \begin{enumerate}
   \item Leaf health was defined as complex state characterized by resistance to foliar disease, flag leaf greenness, leaf area under greenness (LAUG) and flag leaf relative chlorophyll content. 
   \item Yield and yield components traits comprise number of grains panicle, number of effective tillers, thousand kernel weight, and
   \item Morpho-phenology were described by features like plant height, flag leaf area, canopy temperature depression, days to heading and days to anthesis.
 \end{enumerate}
+
+At least four plant hills per plot were sampled for observations except when visually scoring, in which case more than 50% canopy coverage was examined. Features like soil temperature and soil moisture formed basis for environmental covariate adjustment.
+
+\begin{equation}
+(y|\mathcal{B}) \approx \mathcal{N}(X\beta + Zb, \sigma^{2}W^{-1})
+\label{eq:linear-mixed-form}
+\end{equation}
+
+\column{0.5\textwidth}
+
+```{r design-canopy, fig.ncol = 2, fig.width=4, out.width=c("50%", "30%"), fig.cap="Study design and crop canopy shown during recording of observation", fig.subcap=c("Randomized layout of the row-column experimental design", "Wheat crop plot at Jan 9, 2017 (46 days after sowing")}
+knitr::include_graphics("./images/design_layout.png")
+knitr::include_graphics("./images/34046350313_ff4f0341d0_k.jpg")
+```
+
+\end{columns}
 
 <!-- ## -->
 
@@ -60,21 +74,12 @@ Observational traits were categorized into three underlying features:
 
 <!-- A mixed linear model was fitted for each of the response variables $y$ using lme4 package [@bates2014fitting]. All model terms except for the check variety effects, which was considered as fixed because they are purposely selected, were expressed with random intercept terms for obtaining model parameters [@wolfinger1997recovering]. REML estimate of the parameters were obtained by a single call for both fixed and random effects terms. A general matrix structure representation in a linear mixed model with conditional distribution of $y$ given $\mathcal{B} =\beta$ can be represented as shown in Equation \eqref{eq:linear-mixed-form}, -->
 
-\begin{equation}
-(y|\mathcal{B}) \approx \mathcal{N}(X\beta + Zb, \sigma^{2}W^{-1})
-\label{eq:linear-mixed-form}
-\end{equation}
-
 <!-- where $Z$ is the $n \times q$ model matrix for the $q$-dimensional vector-valued random effects variable, $\mathcal{B}$, whose value we are fixing at $b$. The unconditional distribution of $\mathcal{B}$ is also multivariate normal with mean zero and a parameterized $q \times q$ variance-covariance matrix [@bates2014fitting]. For multiple comparison of fixed effects means and stepwise variable selection procedure, least squares means and confidence intervals were calculated by Satterthwaite approximation of degrees of freedom [@alexandra2017]. -->
 
-##
-
-```{r design-canopy, fig.ncol = 2, fig.width=4, out.width=c("50%", "30%"), fig.cap="Study design and crop canopy shown during recording of observation", fig.subcap=c("Randomized layout of the row-column experimental design", "Wheat crop plot at Jan 9, 2017 (46 days after sowing")}
-knitr::include_graphics("./images/design_layout.png")
-knitr::include_graphics("./images/34046350313_ff4f0341d0_k.jpg")
-```
 
 ## Results
+
+<!-- \footnotesize -->
 
 <!-- Mixed model summary of fixed effects terms of yield and yield component traits -->
 
@@ -111,53 +116,54 @@ knitr::include_graphics("./images/34046350313_ff4f0341d0_k.jpg")
 
 <!-- ## -->
 
-The model with both genotypes (checks and entries) outperformed in comparison to the one without in predicting the real yield (\(\chi^2 = 14.4\) with \(df = 4\)).
+- Pairwise comparison of fixed effects estimate indicate that check variety Aditya \(3.02\ tons\ ha^{-1}\ (\pm\ 0.60)\) has the lowest yield amongst all varieties. Bhrikuti gave the highest yield among checks (\(3.54\ tons\ ha^{-1}\ (\pm\ 0.60)\)), although not significantly different from other check varieties.
 
-Pairwise comparison of fixed effects estimate indicate that check variety Aditya has the lowest yield amongst all varieties while other have similar yields. Average yield of the lowest yielder is \(3.02\ tons\ ha^{-1}\ (\pm\ 0.60)\) and Bhrikuti yields the highest with average yield of \(3.54\ tons\ ha^{-1}\ (\pm\ 0.60)\). 
-
-Genotypes show highly significant differences for the disease resistance trait. LRT shows that both checks and entries possess significant heritable variation. Check variety Gautam is relatively asymptomatic (\(2.51\ (\pm\ 1.30)\)) than Bhrikuti(\(3.32\ (\pm\ 1.30)\)) and Tilottama (\(3.35\ (\pm\ 1.30)\)) to foliar pathogen. Although, no distinction could be made on the severity scale of the disease (All check varieties exhibited similarly less affected (2.5-5.0) symptom at the time of scoring). Entry genotypes also show considerable amount of heritable variation.
+- Genotypes show highly significant differences for the disease resistance trait. LRT shows that both checks and entries possess significant heritable variation. With respect to severity, check variety Gautam is relatively asymptomatic (\(2.51\ (\pm\ 1.30)\)) than Bhrikuti(\(3.32\ (\pm\ 1.30)\)) and Tilottama (\(3.35\ (\pm\ 1.30)\)) to foliar pathogen. Check variety Aditya exhibited maximum greenness of the flag leaf followed by Bhrikuti and Gautam (scores for both were at par) and then Tilottama. Likewise, Significant differences were detected among the check genotypes but not among entries for the SPAD measured at Zadok's stage 85.
+<!-- Although, no distinction could be made on the severity scale of the disease (All check varieties exhibited similarly less affected (2.5-5.0) symptom at the time of scoring). Entry genotypes also show considerable amount of heritable variation. -->
 
 ##
 
-Genotypes showed highly significant differences in the greenness score measured measured at Zadok's stages 75 and 85. LRT shows that both checks and entries possess significant heritable variation. Pairwise comparison of fixed effect estimates for both growth stages implicate check variety Aditya for retaining maximum greenness of the flag leaf followed by Bhrikuti and Gautam (both have similar greenness scores) and Tilottama. Noteworthy variation was also found among the entry genotypes (significant at \(p < 0.01\)). Check variety Aditya suffered largest reduction in greenness (\(93.03\ (\pm\ 19.70)\)), while Tilottama had the least (\(77.35\ (\pm\ 19.71)\)) loss of all check varieties. 
+<!-- \footnotesize -->
 
-Highly significant difference exist among the genotypes for Plant height trait. However, the random effects estimates of plant height showed no difference among entry genotypes. No significant difference was discovered among the genotypes for flag leaf surface area trait, either. In contrast, entry genotypes' chlorophyll content at Zadok's stage 65 showed considerable variation, while the it is not true for check genotypes.
+- As for phenology and architecture traits, genotypes showed significant differences for the Canopy temperature depression (CTD) measured near anthesis stage. Canopy structure of check variety Bhrikuti favors greater reduction in temperature than check variety Aditya (\(9.08^\circ C\ (\pm\ 0.79)\)). Other varieties were at par with both of the check varieties. Of difference among genotypes for days to heading trait, check varieties differed from one another except for Aditya (with mean of \(67.79\ (\pm\ 2.40)\) days) and Gautam, both of which initiate heading late. Mean number of days taken for head to develop in half of the population was lowest in Tilottama (\(62.71\ (\pm\ 2.40)\) days) variety. 
+
+- Similarly, entry genotype also exhibited variation for the trait yield and yield components as well most of leaf health and phenology attributes. The model with both genotypes (checks and entries) and leaf health attributes outperformed, the one without in predicting the real yield (\(\chi^2 = 14.4\) with \(df = 4\)).
 
 ##
 
 \footnotesize
 
-Significant differences were detected among the check genotypes but not among entries for the SPAD measured at Zadok's stage 85. Likewise, genotypes have significant differences for the Canopy temperature depression (CTD) measured near anthesis stage. Fixed effect estimates shows that canopy structure of check variety Bhrikuti favors greater reduction in temperature than check variety Aditya (\(9.08^\circ C\ (\pm\ 0.79)\)). Other varieties were at par with both of the check varieties. Highly significant difference were detected among the genotypes were found for days to heading trait. All check varieties differ from one another except for Aditya (late heading type) (with mean of \(67.79\ (\pm\ 2.40)\) days) and Gautam, which require similar days for heading. Mean number of days taken for head to develop in half of the population was lowest in Tilottama (\(62.71\ (\pm\ 2.40)\) days) variety. Similarly, entry genotype levels also exhibited high variation for the trait.
+\begin{columns}
 
+\column{0.26\textwidth}
 \begin{figure}[H]
 
-{\centering \includegraphics[width=0.40\linewidth]{cor-graph-barplot-viz-checks-1} 
+{\centering \includegraphics[width=1.2\linewidth]{cor-graph-barplot-viz-checks-1} 
 
 }
 \caption{Number of checks at different growth stages on February 2, 2017. Time point comparison of different stages of reproductive periods of growth reaffirms that Tilottama variety flowers the earliest amongst the check varieties and Aditya reaches to the flowering relatively late.}\label{fig:cor-graph-barplot-viz-checks}
 \end{figure}
 
-
-##
-
-\footnotesize
+\column{0.80\textwidth}
 
 \begin{figure}[H]
 \footnotesize
 {\centering 
-\subfloat[\tiny Yield\label{fig:yield-blup-viz-1}]{\includegraphics[width=.25\linewidth]{yield-blup-viz-1} }
-\subfloat[\tiny Number of effective tillers\label{fig:yield-blup-viz-2}]{\includegraphics[width=.25\linewidth]{yield-blup-viz-2} }
-\subfloat[\tiny Thousand kernel weight\label{fig:yield-blup-viz-3}]{\includegraphics[width=.25\linewidth]{yield-blup-viz-3} }\newline
-\subfloat[\tiny Number of grains per panicle\label{fig:yield-blup-viz-4}]{\includegraphics[width=.25\linewidth]{yield-blup-viz-4} }
-\subfloat[\tiny Panicle length\label{fig:yield-blup-viz-5}]{\includegraphics[width=.25\linewidth]{yield-blup-viz-5} }}
+\subfloat[\tiny Yield\label{fig:yield-blup-viz-1}]{\includegraphics[width=0.32\linewidth]{yield-blup-viz-1} }
+\subfloat[\tiny Number of effective tillers\label{fig:yield-blup-viz-2}]{\includegraphics[width=0.32\linewidth]{yield-blup-viz-2} }
+\subfloat[\tiny Thousand kernel weight\label{fig:yield-blup-viz-3}]{\includegraphics[width=0.32\linewidth]{yield-blup-viz-3} }\newline
+\subfloat[\tiny Number of grains per panicle\label{fig:yield-blup-viz-4}]{\includegraphics[width=0.32\linewidth]{yield-blup-viz-4} }
+\subfloat[\tiny Panicle length\label{fig:yield-blup-viz-5}]{\includegraphics[width=0.32\linewidth]{yield-blup-viz-5} }}
 \caption{\centering Scatterplot of observed versus BLUP values of yield and yield component traits}\label{fig:yield-blup-viz}
 \end{figure}
+
+\end{columns}
 
 The coefficient of determination, between the observed and fitted values of random effects model are 0.61, 0.36, 0.71, 0.55, 0.48, respectively for the Yield, Number of effective tillers, Thousand kernel weight, Number of grains per panicle and Panicle length.
 
 ## Conclusion
 
-Major leaf health traits that influenced yield were the leaf greenness and relative chlorophyll content. BLUP estimation and adjustment for fixed effects dictate that 68.9\% of the genotypic variation of entry genotypes in yield was explained by the full model (one having both blocking and leaf health components). This reveals that augmenting leaf health traits with structured blocking factors leads to improved yield estimates. Apart from the check variety Aditya, which gave the lowest yield ( $3.02 \pm 0.61$ \si{\tonne\per\hectare}), all other check varieties were similar (3.54 \si{\tonne\per\hectare}, 3.33 \si{\tonne\per\hectare}, 3.42 \si{\tonne\per\hectare}). However, they had more contrasting differences in Number of tillers \si{\per\meter^{2}}. Findings based on block adjusted random effect estimates suggest for inclusion of some entry genotypes, those having leaf traits characterizing good health and with high yielding characters, in advanced evaluation trials. Top ranking high yielding entry genotypes were: TRCH/SRTU//KACHU/3/KINGBIRD\#1, WHEAR/SOKOLL/4/PASTOR// MILAN/KAUZ/3/B $\ldots$ and MUNAL \#1*2/4/HUW234+ LR34/PRINIA//PBW3 $\ldots$
+Major leaf health traits that influenced yield were the leaf greenness and relative chlorophyll content. BLUP estimation and adjustment for fixed effects dictate that 68.9\% of the genotypic variation of entry genotypes in yield was explained by the full model. This reveals that augmenting leaf health traits with structured blocking factors leads to improved yield estimates. Although, for yield, all other check varieties were similar (3.54 \si{\tonne\per\hectare}, 3.33 \si{\tonne\per\hectare}, 3.42 \si{\tonne\per\hectare}) except Aditya (which gave lesser yield), checks showed marked difference in the number of tillers counted \si{\per\meter^{2}}. Block adjusted random effect estimates suggest for inclusion of some entry genotypes, those of which yield better despite disease in advanced evaluation trials. Top ranking high yielding entry genotypes were: TRCH/SRTU//KACHU/3/KINGBIRD\#1, WHEAR/SOKOLL/4/PASTOR// MILAN/KAUZ/3/B $\ldots$ and MUNAL \#1*2/4/HUW234+ LR34/PRINIA//PBW3 $\ldots$.
 
 ## References
 \tiny
