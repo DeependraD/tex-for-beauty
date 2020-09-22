@@ -21,12 +21,12 @@ branches:
           - /^v\d+\.\d+/
 before_deploy:
       # Set up git user name and tag this commit
-      if ! [[ $TRAVIS_TAG ]]; then
-               git config --local user.name "DeependraD" &&
-               git config --local user.email "dean.ionized@gmail.com" &&
-               export TRAVIS_TAG="${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}" &&
-               git tag "$TRAVIS_TAG"; 
-      fi
+        if ! [[ $TRAVIS_TAG ]]; then
+                git config --local user.name "DeependraD" &&
+                git config --local user.email "dean.ionized@gmail.com" &&
+                export TRAVIS_TAG="${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}" &&
+                git tag "$TRAVIS_TAG";
+        fi
 deploy:
         provider: releases
         # overwrite: true
