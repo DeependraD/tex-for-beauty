@@ -1,0 +1,185 @@
+---
+name: Deependra
+surname: Dhakal
+position: ""
+address: "Siranchowk-3 (Harmi), Gorkha"
+phone: +977 9845333283
+www: rookie.rbind.io
+email: "ddhakal.rookie@gmail.com"
+twitter: dd_rookie
+github: deependrad
+# linkedin: ""
+date: "`r format(Sys.time(), '%B %Y')`"
+geometry: "margin=1.25cm"
+output: 
+  vitae::awesomecv:
+    keep_tex: yes
+    includes:
+      in_header: preamble.tex
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(vitae)
+
+```
+
+\bpicture
+\includegraphics[width=5em]{Photo_pp.jpg}
+\epicture
+
+# Education
+
+```{r education}
+require(tidyverse)
+tribble(
+  ~ Year, ~ Degree, ~ Institution, ~ Location, ~ Score, ~ Board,
+  "2016--2018", "M. Sc. Ag. (Plant Breeding and Genetics)", "Agriculture and Forestry Campus, Rampur", "Chitwan", "First Division", "Agriculture and Forestry University",
+"2010--2015", "B. Sc. (Agriculture)", "Institute of Agriculture and Animal Science", "Lamjung", "First Division", "Tribhuvan University",
+"2008--2010", "Higher Secondary Level (10+2 in Science)", "Orchid Science College", "Chitwan", "First Division", "Higher Secondary Education Board",
+"2008", "School Leaving Certificate", "Small Heaven Higher Secondary Boarding School", "Chitwan", "Distinction", "SLC Board"
+) %>% 
+  vitae::detailed_entries(what = Institution, when = Year, with = Board, where = Location, why = Score)
+
+```
+
+# Competencies
+
+## Computing
+
+### Scripting {-}
+
+\begin{multicols}{2}
+\begin{itemize}
+\item Python, 
+\item R, 
+\item Bash,
+\item Javascript,
+\item Markdown,
+\item \LaTeX,
+\item HTML
+\end{itemize}
+\end{multicols}
+
+### Domain applications {-}
+
+\begin{multicols}{2}
+\begin{itemize}
+\item Crop modeling
+\item DSSAT
+\item GIS and spatial analysis
+\item QGIS
+\end{itemize}
+\end{multicols}
+
+### General purpose applications {-}
+
+\begin{multicols}{2}
+\begin{itemize}
+\item ImageMagick,
+\item Tesseract,
+\item MS Word, MS Excel, VBscript,
+\item Adobe Photoshop
+\end{itemize}
+\end{multicols}
+
+## Communication Language
+
+- Nepali
+- Hindi
+- English
+
+# Training and Experience
+
+
+```{r t-n-e}
+
+experience_training <- tribble(
+  ~ Period, ~ Program, ~ Location, ~ Organizer, ~ Position, ~ Affiliation,
+  "March 29 2019--Ongoing", "Gokuleshwor Agriculture and Animal Science College", "Baitadi, Nepal", NA, "\\textit{Assistant Professor}", "Department of Plant Breeding and Genetics",
+  "May 9, 2018--March 28, 2019", "Unique Seed Company Pvt. Ltd.", "Dhangadhi, Kailali, Nepal", NA, "\\textit{Crop Breeder}", "Crop Breeding and Research Division",
+  "February 17, 2019--February 18, 2019", "National training workshop on 'Seed Quality and Productivity Enhancement Technologies in Lentil'", "Nepalgunj, Nepal", "Organized by: CIMMYT and NGLRP/NARC", NA, "representing Unique Seed Company Pvt. Ltd.",
+  "February 13, 2019--February 15, 2019", "International training workshop on 'Hybrid Vegetable Seed Production and Marketing'", "Dang, Nepal", "Organized by: HRD/NARC, SEAN, CIMMYT and World Vegetable Center", NA, "representing Unique Seed Company Pvt. Ltd.", 
+  "October 1, 2018--October 3, 2018", 'International training on "Hybrid Maize Seed Production and Marketing"', "Kathmandu, Nepal", "Organized by: CIMMYT", NA, "representing Unique Seed Company Pvt. Ltd.", 
+  "September 29, 2018--September 30, 2018", 'International training on "Statistical Data Analysis"', "Kathmandu, Nepal", "Organized by: CIMMYT", NA, "representing Unique Seed Company Pvt. Ltd.", 
+  "July 17, 2018--August 31, 2018", "International training on 'Hybrid Maize Comprehensive Technologies'", "Chitwan, Nepal", "Organized by: Yuan Longping High-Tech Agriculture Co. Ltd., Changsha, China and NMRP/NARC, Nepal", NA, "representing Unique Seed Company Pvt. Ltd.",
+  "November 2016--December 2016", "Enhancing quality standards of raw milk: Validation of Good Manufacturing Practices(GMP) in the supply chain.", "Tanahun, Nepal", NA, "\\textit{Field Research Associate}", "FORWARD Nepal",
+  "March 2014--April 2014", "Action Research for Cost Effective Agricultural Extension Services in 10 mid-hill districts of Nepal.", "Rukum, Nepal", NA, "\\textit{Enumerator}", "Nepal Development Research Institute")
+
+experience_training %>% 
+  mutate(Program = ifelse(!is.na(Organizer), paste0(Program, "; ", Organizer), Program)) %>% 
+  select(-Organizer) %>% 
+  vitae::detailed_entries(what = Affiliation,
+                          when = Period,
+                          with = Program,
+                          where = Location,
+                          why = Position, 
+                          .protect = FALSE)
+
+```
+
+# Research interests
+
+```{r interests}
+tribble(
+  ~ Idea, ~ Specialization,
+  "Mathematical modeling", "Cropping systems simulation and inference on ecological data",
+  "Geo-spatial statistics", "Feature identification and visual summary of data",
+  "Multivariate analysis", "of genotype and phenotype information",
+  "Design and optimization of experiments", "Both for controlled environments and without environmental control; Randomization based design and design search algorithms") %>% 
+  vitae::brief_entries(what = glue::glue("Interested in {Idea}"),
+                       with = Specialization)
+
+```
+
+\newpage
+
+# Publications
+
+```{r publications}
+library(dplyr)
+# knitr::write_bib(c("vitae", "tibble"), "packages.bib")
+
+bibliography_entries("publications.bib") %>%
+  arrange(desc(author$family), issued)
+
+```
+
+
+# Advisor and Referee
+
+\bmulticols
+
+\columnbreak
+
+### Dr. Madhav Prasad Pandey {-}
+  - Professor
+  - Department of Genetics and Plant Breeding
+  - Agriculture and Forestry University
+  - 9855081410
+  - \href{mailto:mppandey@afu.edu.np}{mppandey@afu.edu.np}
+
+### Dr. Krishna Hari Dhakal {-}
+  - Chairman
+  - Department of Genetics and Plant Breeding
+  - Agriculture and Forestry University
+  - 9843561486
+  - \href{mailto:khdhakal@afu.edu.np}{khdhakal@afu.edu.np}
+
+\columnbreak
+
+### Mr. Laxmi Kant Dhakal {-}
+  - Chairman
+  - Unique Seed Company Pvt. Ltd.
+  - Dhangadhi, Kailali
+  - 9858420560
+  - \href{mailto:krishak14@gmail.com}{krishak14@gmail.com}
+
+\emulticols
+
+\vspace{1.5cm}
+\parbox[t]{\textwidth}{
+{\bfseries Declaration}\par
+
+I hereby declare that, all the information stated above is true and genuine in my belief. I can dispense any and/or all of the mentioned works in verified form whenever demanded.
+}

@@ -1,0 +1,23 @@
+\usepackage{tabularx}
+
+\newcommand{\recommendation}[6]{% change this to accept more details
+  \noindent
+  \begin{tabularx}{.5\linewidth}{@{\extracolsep{2pt}} l p{5cm} }
+    Name: & \bfseries\textit{#1} \\
+    Designation: & #2 \\
+    Department: & #3 \\
+    Institute: & #4 \\
+    Mobile: & #5 \\
+    Email: & #6 % \\
+    % Other: & #7
+  \end{tabularx}%
+}
+
+% \graphicspath{{cv/}}
+\newcommand{\bpicture}{\begin{picture}(0,0)\put(460,50)}
+\newcommand{\epicture}{\end{picture}}
+
+\usepackage{multicol}
+
+\newcommand{\bmulticols}{\begin{multicols}{2}}
+\newcommand{\emulticols}{\end{multicols}}

@@ -1,0 +1,163 @@
+\documentclass{book}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+% \usepackage[demo]{graphicx}
+\usepackage{wallpaper}
+\usepackage{hyperref}
+
+\usepackage{fancyhdr}
+\usepackage{lettrine}
+\input Acorn.fd
+\newcommand*\initfamily{\usefont{U}{Acorn}{xl}{n}}
+
+% load additional packages
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{emptypage}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage[normalem]{ulem}
+\usepackage{rotating}
+
+\usepackage{geometry}
+\geometry{
+tmargin=4cm, 
+bmargin=4cm, 
+lmargin=4cm, 
+rmargin=2.5cm,
+headheight=1.2cm,
+headsep=0.7cm,
+footskip=0.5cm}
+
+
+% \usepackage[full]{textcomp}
+% \renewcommand{\familydefault}{pplj} 
+% \usepackage[
+% final,
+% stretch=10,
+% protrusion=true,
+% tracking=true,
+% spacing=on,
+% kerning=on,
+% expansion=true]{microtype}
+
+\setlength{\parskip}{1.3ex plus 0.2ex minus 0.2ex}
+
+
+\usepackage{fourier-orns}
+
+\newcommand{\ornamento}{\vspace{2em}\noindent \textcolor{darkgray}{\hrulefill~ \raisebox{-2.5pt}[10pt][10pt]{\leafright \decofourleft \decothreeleft  \aldineright \decotwo \floweroneleft \decoone   \floweroneright \decotwo \aldineleft\decothreeright \decofourright \leafleft} ~  \hrulefill \\ \vspace{2em}}}
+\newcommand{\ornpar}{\noindent \textcolor{darkgray}{ \raisebox{-1.9pt}[10pt][10pt]{\leafright} \hrulefill \raisebox{-1.9pt}[10pt][10pt]{\leafright \decofourleft \decothreeleft  \aldineright \decotwo \floweroneleft \decoone}}}
+\newcommand{\ornimpar}{\textcolor{darkgray}{\raisebox{-1.9pt}[10pt][10pt]{\decoone \floweroneright \decotwo \aldineleft \decothreeright \decofourright \leafleft} \hrulefill \raisebox{-1.9pt}[10pt][10pt]{\leafleft}}}
+
+\makeatletter
+\def\headrule{{\color{darkgray}\raisebox{-2.1pt}[10pt][10pt]{\leafright} \hrulefill \raisebox{-2.1pt}[10pt][10pt]{~~~\decofourleft \decotwo\decofourright~~~} \hrulefill \raisebox{-2.1pt}[10pt][10pt]{ \leafleft}}}
+\makeatother
+
+\fancyhf{}
+
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+
+% \newcommand{\estcab}[1]{\itshape\textcolor{marron}{\nouppercase #1}}
+\newcommand{\estcab}[1]{\itshape\textcolor{marron}{#1}}
+
+\fancyhead[LE]{\estcab{}} % left side text
+\fancyhead[RE]{\estcab{Deependra Dhakal}} % right side text
+% \fancyhead[CE,CO]{\estcab{\decoone}}
+\fancyhead[LO]{\estcab{\rightmark}} % malo cuando no hay section ~~~ \thesection
+\fancyhead[RO]{\estcab{\leftmark}}
+
+% \fancyhead[RO]{\bf\nouppercase{ \leftmark}}
+% \fancyfoot[LE]{\bf \thepage ~~ \leafNE}
+% \fancyfoot[RO]{ \leafNE  ~~ \bf \thepage}
+
+\fancyfoot[LO]{
+\ornimpar \\ \large \hfill \sffamily\bf \textcolor{darkgray}{\leafNE ~~~ \thepage}
+}
+\fancyfoot[RE]{\ornpar   \\ \large  \sffamily\bf \textcolor{darkgray}{\thepage ~~~ \reflectbox{\leafNE}}  \hfill}
+
+\newenvironment{Section}[1]
+{\section{\vspace{0ex}#1}}
+{\vspace{12pt}\centering ------- \decofourleft\decofourright ------- \par}
+
+\definecolor{marron}{RGB}{60,30,10}
+\definecolor{darkblue}{RGB}{0,0,80}
+\definecolor{lightblue}{RGB}{80,80,80}
+\definecolor{darkgreen}{RGB}{0,80,0}
+\definecolor{darkgray}{RGB}{0,80,0}
+\definecolor{darkred}{RGB}{80,0,0}
+\definecolor{shadecolor}{rgb}{0.97,0.97,0.97}
+
+\usepackage{lipsum}
+\setlength{\parindent}{1em} % Sangría española
+\pagestyle{fancy}
+
+\renewcommand{\footnoterule}{\vspace{-0.5em}\noindent\textcolor{marron}{\decosix \raisebox{2.9pt}{\line(1,0){100}} \lefthand} \vspace{.5em} }
+\usepackage[hang,splitrule]{footmisc}
+\addtolength{\footskip}{0.5cm}
+\setlength{\footnotemargin}{0.3cm}
+\setlength{\footnotesep}{0.4cm} 
+
+\usepackage{chngcntr}
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+
+% enable short form of landscape specifier command
+\newcommand{\blandscape}{\begin{landscape}}
+\newcommand{\elandscape}{\end{landscape}}
+
+% make float environment lesser of floating
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\topfraction}{0.8}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\floatpagefraction}{0.75}
+
+% makes hyperlinks actual footnotes
+\let\oldhref\href
+\renewcommand{\href}[2]{#2\footnote{\url{#1}}}
+\raggedbottom
+
+\newlength{\drop}
+
+\begin{document}
+
+\begin{titlepage}
+	\drop=0.1\textheight
+	\centering
+	\vspace*{\baselineskip}
+	\rule{\textwidth}{1.6pt}\vspace*{-\baselineskip}\vspace*{2pt}
+	\rule{\textwidth}{0.4pt}\\[\baselineskip]
+	{\Large PLANNING AND LAYOUT\\ of \\[0.3\baselineskip] FRUIT ORCHARD}\\[0.2\baselineskip]
+	\rule{\textwidth}{0.4pt}\vspace*{-\baselineskip}\vspace{3.2pt}
+	\rule{\textwidth}{1.6pt}\\[\baselineskip]
+	\scshape
+	a Review \\ % reasonable subtitle
+	\vspace*{2\baselineskip}
+	Edited by \\[\baselineskip]
+	{\Large Deependra Dhakal\par} % insert any number of editors by following with "\\" after first
+	% {\Large Deependra Dhakal \\ Deependra Dhakal\par} % example multieditors
+	{\itshape Instructor \\ Triveni Secondary School \\ Gorkha, Nepal\par} % typically organization name and address
+	\vfill
+	{\scshape 2018} \\
+	% {\Large Publisher name}\par % contains publisher name
+\end{titlepage}
+
+\section{Preparation of land}
+
+The land should be cleaned properly for free movement of man and machinery. All the trees, bushes and creepers should be removed. The stubbles should be uprooted to avoid regeneration of growth and obstruction for movement of machines. The soil of the area destined for growing fruit plants needs thorough preparation. A virgin land requires a deep ploughing and harrowing. The land should be repeatedly ploughed and bring the soil to a fine tilth and pulverise the weeds or other undesirable herbs under the soil. The land should be thoroughly harrowed and levelled. While preparing the land, the subsoil which is usually less fertile than the surface soil, should not be disturbed as far as possible. If possible, green manuring crop like daincha, sunhemp, cowpea etc, may be raised and ploughed down during land preparation to enrich the orchard soil and improve its physical condition. In the hills, terraces should be made along the contours.
+
+\section{Layout plan}
+
+Layout: The marking of position of the plant in the field is referred as to layout.
+
+The layout plan of the orchard should be prepared carefully, preferably in consulation with horticultural experts. The orchard layout plan includes the system of planting, provision for orchard paths, roads, water channels and farm building. A sketch of the proposed orchard should be prepared on a paper before the actual planting is taken in hand.
+
+\end{document}
