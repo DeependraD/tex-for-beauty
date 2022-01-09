@@ -1,0 +1,1 @@
+This package automates generation of reporting template of two pages (basically).
