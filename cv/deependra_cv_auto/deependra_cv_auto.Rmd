@@ -96,7 +96,8 @@ tribble(
 
 experience_training <- tribble(
   ~ Period, ~ Program, ~ Location, ~ Organizer, ~ Position, ~ Affiliation,
-  "April 21 2021--Ongoing", "Ministry of Land Management, Agriculture and Cooperative", "Pokhara, Kaski", NA, "\\textit{Crop Development Officer}", "Seed Laboratory, Gandaki Province",
+  "April 13 2022-- Ongoing", "Agriculture and Forestry University", "Rampur, Chitwan, Nepal", NA, "\\textit{Assistant Professor}", "Department of Genetics and Plant Breeding",
+  "April 21 2021-- April 12, 2022", "Ministry of Land Management, Agriculture and Cooperative", "Pokhara, Kaski, Nepal", NA, "\\textit{Crop Development Officer}", "Seed Laboratory, Gandaki Province",
   "March 29 2019--December 2020", "Gokuleshwor Agriculture and Animal Science College", "Baitadi, Nepal", NA, "\\textit{Assistant Professor}", "Department of Plant Breeding and Genetics",
   "May 9, 2018--March 28, 2019", "Unique Seed Company Pvt. Ltd.", "Dhangadhi, Kailali, Nepal", NA, "\\textit{Crop Breeder}", "Crop Breeding and Research Division",
   "February 17, 2019--February 18, 2019", "National training workshop on 'Seed Quality and Productivity Enhancement Technologies in Lentil'", "Nepalgunj, Nepal", "Organized by: CIMMYT and NGLRP/NARC", NA, "representing Unique Seed Company Pvt. Ltd.",
