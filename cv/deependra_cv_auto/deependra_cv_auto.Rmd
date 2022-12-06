@@ -10,7 +10,7 @@ twitter: dd_rookie
 github: deependrad
 # linkedin: ""
 date: "`r format(Sys.time(), '%B %Y')`"
-geometry: "margin=1.25cm"
+# geometry: "margin=1.25cm"
 output: 
   vitae::awesomecv:
     keep_tex: yes
@@ -86,8 +86,8 @@ tribble(
 ## Communication Language
 
 - Nepali
-- Hindi
 - English
+- Hindi
 
 # Training and Experience
 
@@ -134,7 +134,6 @@ tribble(
 
 ```
 
-\newpage
 
 # Publications
 
