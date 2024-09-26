@@ -51,13 +51,12 @@ tribble(
 
 \begin{multicols}{2}
 \begin{itemize}
-\item Python, 
 \item R, 
-\item Bash,
-\item Javascript,
-\item Markdown,
 \item \LaTeX,
-\item HTML
+\item Bash,
+\item Python,
+\item Markdown,
+\item ImageMagick
 \end{itemize}
 \end{multicols}
 
@@ -65,21 +64,8 @@ tribble(
 
 \begin{multicols}{2}
 \begin{itemize}
-\item Crop modeling
-\item DSSAT
-\item GIS and spatial analysis
-\item QGIS
-\end{itemize}
-\end{multicols}
-
-### General purpose applications {-}
-
-\begin{multicols}{2}
-\begin{itemize}
-\item ImageMagick,
-\item Tesseract,
-\item MS Word, MS Excel, VBscript,
-\item Adobe Photoshop
+\item Crop modeling using DSSAT and R
+\item Geo-spatial analysis using QGIS and GeoDa
 \end{itemize}
 \end{multicols}
 
@@ -125,10 +111,9 @@ experience_training %>%
 ```{r interests}
 tribble(
   ~ Idea, ~ Specialization,
-  "Mathematical modeling", "Cropping systems simulation and inference on ecological data",
-  "Geo-spatial statistics", "Feature identification and visual summary of data",
-  "Multivariate analysis", "of genotype and phenotype information",
-  "Design and optimization of experiments", "Both for controlled environments and without environmental control; Randomization based design and design search algorithms") %>% 
+  "Mathematical modeling", "using cropping systems simulation of agro-ecology",
+  "Geo-spatial statistics", "for feature identification and inference",
+  "Design and optimization of experiments", "in both, controlled and natural environment") %>% 
   vitae::brief_entries(what = glue::glue("Interested in {Idea}"),
                        with = Specialization)
 
@@ -142,7 +127,7 @@ library(dplyr)
 # knitr::write_bib(c("vitae", "tibble"), "packages.bib")
 
 bibliography_entries("publications.bib") %>%
-  arrange(desc(author$family), issued)
+  arrange(desc(issued))
 
 ```
 
@@ -153,28 +138,28 @@ bibliography_entries("publications.bib") %>%
 
 \columnbreak
 
-### Dr. Madhav Prasad Pandey {-}
+### Madhav Prasad Pandey, PhD {-}
   - Professor
   - Department of Genetics and Plant Breeding
   - Agriculture and Forestry University
-  - 9855081410
+  - +977-9855081410
   - \href{mailto:mppandey@afu.edu.np}{mppandey@afu.edu.np}
 
-### Dr. Krishna Hari Dhakal {-}
-  - Chairman
-  - Department of Genetics and Plant Breeding
-  - Agriculture and Forestry University
-  - 9843561486
-  - \href{mailto:khdhakal@afu.edu.np}{khdhakal@afu.edu.np}
+### Lal Prasad Amgain, PhD {-}
+  - Professor
+  - Department of Agronomy
+  - Tribhuwan University
+  - +977-9851219516
+  - \href{mailto:amgainlp@gmail.com}{amgainlp@gmail.com}
 
 \columnbreak
 
-### Mr. Laxmi Kant Dhakal {-}
-  - Chairman
-  - Unique Seed Company Pvt. Ltd.
-  - Dhangadhi, Kailali
-  - 9858420560
-  - \href{mailto:krishak14@gmail.com}{krishak14@gmail.com}
+### Mahendra Tripathi, PhD {-}
+  - Scientist
+  - Agronomy/Plant Breeding and Genetics
+  - National Maize Research Program (NMRP), Rampur, Nepal
+  - +977-9846871041
+  - \href{mailto:mptripathi@gmail.com}{mptripathi@gmail.com}
 
 \emulticols
 
