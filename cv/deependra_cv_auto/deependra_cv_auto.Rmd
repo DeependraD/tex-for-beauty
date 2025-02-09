@@ -8,8 +8,10 @@ www: rookie.rbind.io
 email: "ddhakal.rookie@gmail.com"
 twitter: dd_rookie
 github: deependrad
+orcid: 0000-0002-0347-7950
 # linkedin: ""
 date: "`r format(Sys.time(), '%B %Y')`"
+profilepic: Photo_pp.jpg
 # geometry: "margin=1.25cm"
 output: 
   vitae::awesomecv:
@@ -24,9 +26,9 @@ library(vitae)
 
 ```
 
-\bpicture
-\includegraphics[width=5em]{Photo_pp.jpg}
-\epicture
+<!-- \bpicture -->
+<!-- \includegraphics[width=5em]{Photo_pp.jpg} -->
+<!-- \epicture -->
 
 # Education
 
@@ -95,7 +97,7 @@ experience_training %>%
 ```{r interests, results='asis'}
 interests <- tribble(
   ~ Idea, ~ Specialization,
-  "Mathematical graphics", "Coded flag (The Most Mathematical Flag - Numberphile\\footnote{\\url{https://www.youtube.com/watch?v=f2Gne3UHKHs}}) of Nepal using TikZ; Repository: \\url{https://github.com/DeependraD/flag-of-nepal}.",
+  "Mathematical graphics", "Coded flag$^1$ of Nepal using TikZ; Repository: \\url{https://github.com/DeependraD/flag-of-nepal}.",
   "Study of non-linear systems (crop growth and economy of agricultural products) using dynamic programming", "Distributed lag based enterprise appraisal parametrizing biological fruit growth in Coffee (\\url{https://github.com/DeependraD/distributed-lag-enterprise-simulation}); Price transmission study in Wheat (\\url{https://github.com/DeependraD/macroeconomics_thesis})",
   "Blogging and web", "Maintain a personal website in open-source community hosted domain using Hugo (\\url{https://github.com/DeependraD/dblog})",
   "Colorimetry and image analysis", "Created an adaptation of Munsell Color system for visual rating of leaf color (\\url{https://github.com/DeependraD/munsell_crop_adaptation})")
@@ -105,10 +107,13 @@ interests <- tribble(
 #                        with = Specialization)
 
 store_text <- knitr::kable(interests, booktabs = TRUE, escape = FALSE, format = "latex") %>% 
-  kableExtra::kable_styling(font_size = 9, position = "left") %>% 
-  kableExtra::column_spec(column = 1:2, width = c("12em", "40em"))
+  kableExtra::kable_styling(font_size = 10, position = "left") %>% 
+  kableExtra::column_spec(column = 1:2, width = c("12em", "36em")) %>% 
+  kableExtra::footnote(number = "The Most Mathematical Flag - Numberphile; URL: https://www.youtube.com/watch?v=f2Gne3UHKHs", threeparttable = TRUE, fixed_small_size = FALSE, escape = FALSE)
 
-cat(str_remove(store_text, "\\\\\\\\\\n\\\\bottomrule"))
+cat(store_text)
+
+# cat(str_remove(store_text, "\\\\\\\\\\n\\\\bottomrule"))
 
 ```
 
