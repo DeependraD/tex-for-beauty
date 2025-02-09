@@ -651,8 +651,8 @@
   \begin{center}
     \setlength\tabcolsep{0pt}
     \setlength{\extrarowheight}{0pt}
-    \begin{tabular*}{\textwidth}{@{\extracolsep{3pt}} C{1.5cm} L{\textwidth - 11.0cm} R{8cm}}
-    % \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} C{1.5cm} L{\textwidth - 11.0cm} R{8cm}}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{3pt}} C{1.5cm} L{\textwidth - 4.0cm} R{2cm}}
+    % \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} C{1.5cm} L{\textwidth - 4.0cm} R{2cm}}
 }{%
     \end{tabular*}
   \end{center}

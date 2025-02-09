@@ -34,8 +34,8 @@ library(vitae)
 require(tidyverse)
 tribble(
   ~ Year, ~ Degree, ~ Institution, ~ Location, ~ Score, ~ Board,
-  "2016--2018", "M. Sc. Ag. (Plant Breeding and Genetics)", "Agriculture and Forestry Campus, Rampur", "Chitwan", "First Division", "Agriculture and Forestry University",
-"2010--2015", "B. Sc. (Agriculture)", "Institute of Agriculture and Animal Science", "Lamjung", "First Division", "Tribhuvan University",
+  "2016--2018", "MS (Plant Breeding and Genetics)", "Agriculture and Forestry Campus, Rampur", "Chitwan", "First Division", "(MS; Plant Breeding and Genetics) Agriculture and Forestry University",
+"2010--2015", "BS (Agriculture)", "Institute of Agriculture and Animal Science", "Lamjung", "First Division", "(BS; Agriculture) Tribhuvan University",
 "2008--2010", "Higher Secondary Level (10+2 in Science)", "Orchid Science College", "Chitwan", "First Division", "Higher Secondary Education Board",
 "2008", "School Leaving Certificate", "Small Heaven Higher Secondary Boarding School", "Chitwan", "Distinction", "SLC Board"
 ) %>% 
@@ -45,49 +45,19 @@ tribble(
 
 # Competencies
 
-## Computing
-
-### Scripting {-}
+## Scripting and domain interests {-}
 
 \begin{multicols}{2}
 \begin{itemize}
-\item Python, 
-\item R, 
-\item Bash,
-\item Javascript,
-\item Markdown,
-\item \LaTeX,
-\item HTML
+\item R -- Graphical/functional programming and algorithmic development
+\item \LaTeX -- TikZ, literate programming
+\item Bash -- General purpose scripting, file management, code version control and execution
+\item Julia -- Dynamic programming and optimal experimental designing
+\item ImageJ and Python  -- Image and algorithmic analysis
+\item DSSAT/aquacrop -- Crop physiology studies and environment management decision
+\item QGIS and GeoDa -- Geographical data exploration/aggregation
 \end{itemize}
 \end{multicols}
-
-### Domain applications {-}
-
-\begin{multicols}{2}
-\begin{itemize}
-\item Crop modeling
-\item DSSAT
-\item GIS and spatial analysis
-\item QGIS
-\end{itemize}
-\end{multicols}
-
-### General purpose applications {-}
-
-\begin{multicols}{2}
-\begin{itemize}
-\item ImageMagick,
-\item Tesseract,
-\item MS Word, MS Excel, VBscript,
-\item Adobe Photoshop
-\end{itemize}
-\end{multicols}
-
-## Communication Language
-
-- Nepali
-- English
-- Hindi
 
 # Training and Experience
 
@@ -120,17 +90,25 @@ experience_training %>%
 
 ```
 
-# Research interests
+# Hobbies and personal projects
 
-```{r interests}
-tribble(
+```{r interests, results='asis'}
+interests <- tribble(
   ~ Idea, ~ Specialization,
-  "Mathematical modeling", "Cropping systems simulation and inference on ecological data",
-  "Geo-spatial statistics", "Feature identification and visual summary of data",
-  "Multivariate analysis", "of genotype and phenotype information",
-  "Design and optimization of experiments", "Both for controlled environments and without environmental control; Randomization based design and design search algorithms") %>% 
-  vitae::brief_entries(what = glue::glue("Interested in {Idea}"),
-                       with = Specialization)
+  "Mathematical graphics", "Coded flag (The Most Mathematical Flag - Numberphile\\footnote{\\url{https://www.youtube.com/watch?v=f2Gne3UHKHs}}) of Nepal using TikZ; Repository: \\url{https://github.com/DeependraD/flag-of-nepal}.",
+  "Study of non-linear systems (crop growth and economy of agricultural products) using dynamic programming", "Distributed lag based enterprise appraisal parametrizing biological fruit growth in Coffee (\\url{https://github.com/DeependraD/distributed-lag-enterprise-simulation}); Price transmission study in Wheat (\\url{https://github.com/DeependraD/macroeconomics_thesis})",
+  "Blogging and web", "Maintain a personal website in open-source community hosted domain using Hugo (\\url{https://github.com/DeependraD/dblog})",
+  "Colorimetry and image analysis", "Created an adaptation of Munsell Color system for visual rating of leaf color (\\url{https://github.com/DeependraD/munsell_crop_adaptation})")
+
+# interests %>% 
+#   vitae::brief_entries(what = Idea,
+#                        with = Specialization)
+
+store_text <- knitr::kable(interests, booktabs = TRUE, escape = FALSE, format = "latex") %>% 
+  kableExtra::kable_styling(font_size = 9, position = "left") %>% 
+  kableExtra::column_spec(column = 1:2, width = c("12em", "40em"))
+
+cat(str_remove(store_text, "\\\\\\\\\\n\\\\bottomrule"))
 
 ```
 
@@ -142,7 +120,7 @@ library(dplyr)
 # knitr::write_bib(c("vitae", "tibble"), "packages.bib")
 
 bibliography_entries("publications.bib") %>%
-  arrange(desc(author$family), issued)
+  arrange(desc(issued))
 
 ```
 
@@ -153,28 +131,28 @@ bibliography_entries("publications.bib") %>%
 
 \columnbreak
 
-### Dr. Madhav Prasad Pandey {-}
+### Madhav Prasad Pandey, PhD {-}
   - Professor
   - Department of Genetics and Plant Breeding
   - Agriculture and Forestry University
-  - 9855081410
+  - +977-9855081410
   - \href{mailto:mppandey@afu.edu.np}{mppandey@afu.edu.np}
 
-### Dr. Krishna Hari Dhakal {-}
-  - Chairman
-  - Department of Genetics and Plant Breeding
-  - Agriculture and Forestry University
-  - 9843561486
-  - \href{mailto:khdhakal@afu.edu.np}{khdhakal@afu.edu.np}
+### Lal Prasad Amgain, PhD {-}
+  - Professor
+  - Department of Agronomy
+  - Tribhuwan University
+  - +977-9851219516
+  - \href{mailto:amgainlp@gmail.com}{amgainlp@gmail.com}
 
 \columnbreak
 
-### Mr. Laxmi Kant Dhakal {-}
-  - Chairman
-  - Unique Seed Company Pvt. Ltd.
-  - Dhangadhi, Kailali
-  - 9858420560
-  - \href{mailto:krishak14@gmail.com}{krishak14@gmail.com}
+### Mahendra Tripathi, PhD {-}
+  - Scientist
+  - Agronomy/Plant Breeding and Genetics
+  - National Maize Research Program (NMRP), Rampur, Nepal
+  - +977-9846871041
+  - \href{mailto:mptripathi@gmail.com}{mptripathi@gmail.com}
 
 \emulticols
 
